@@ -1,0 +1,322 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="doc_management_style.css" />
+</head>
+
+<body>
+    <div class="dropdown" style="z-index: 9999">
+        <button class="dropbtn">Chọn hành động</button>
+        <div class="dropdown-content">
+            <button onclick="addHeading('section')">Thêm Điều</button>
+            <button onclick="addSameLevel()">Thêm mục cùng cấp</button>
+            <button onclick="addSubLevel()">Thêm cấp con</button>
+            <button onclick="addBulletPoint()">Thêm gạch đầu dòng</button>
+            <button onclick="addNewLine()">Thêm dòng mới</button>
+            <button onclick="toggleCounter()">Bật/Tắt đánh số tại mục</button>
+            <button onclick="increaseLevel()">Tăng cấp chỉ mục</button>
+            <button onclick="decreaseLevel()">Giảm cấp chỉ mục</button>
+        </div>
+    </div>
+
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container" id="allvoice">
+            <p style="text-align: right">
+                <b>Mẫu số 11d</b>
+            </p>
+            <p class="tx14 bold txcenter">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <p class="tx14 bold txcenter">Độc lập - Tự do - Hạnh phúc
+                <hr style="width: 30%" />
+            </p>
+            <p class="tx14 txcenter"><i>........, ngày........ tháng........ năm.........</i></p>
+            <p>&nbsp;</p>
+            <p class="tx14 bold txcenter">
+                PHIẾU YÊU CẦU THÔNG BÁO VỀ VIỆC THẾ CHẤP PHƯƠNG TIỆN GIAO THÔNG
+            </p>
+            <p class="tx14 txcenter">
+                Kính gửi: <span class="html_key" id="sendTo_key">[...]</span>
+            </p>
+            <p>&nbsp;</p>
+
+            <p class="tx14 txindent bold">1. Thông tin về cá nhân (tổ chức) yêu cầu </p>
+            <p class="tx14 txindent txcondensed">
+                - Họ và tên đầy đủ đối với cá nhân/tên đầy đủ đối với tổ chức <i>(viết chữ IN HOA)</i>: </p>
+            <p class="tx14 txindent"><span class="html_key" id="applicantNameCap_key">[...]</span></p>
+            <p class="tx14 txindent">- Địa chỉ: </p>
+            <p class="tx14 txindent"><span class="html_key" id="applicantAddress_key">[...]</span></p>
+            <p class="tx14 txindent">
+                - Mã số tài khoản đăng ký trực tuyến <i>(nếu có)</i>:
+                <span class="html_key" id="accId_key">[...]</span>
+            </p>
+            <p class="tx14 txindent bold">2. Nội dung yêu cầu </p>
+            <p class="tx14 txindent">
+                2.1. Đề nghị quý Trung tâm cấp bản sao Văn bản chứng nhận đăng ký và thông báo về việc đăng 
+                ký biện pháp bảo đảm (đăng ký/đăng ký thay đổi/xóa đăng ký) đối với tài sản bảo đảm như sau:
+            </p>
+            <p class="tx14 txindent">
+                - Đối với phương tiện giao thông cơ giới đường bộ:  <span class="html_key" id="vehicleName_2_1_key">[...]</span> 
+                có số khung <span class="html_key" id="vehicleId_2_1_key">[...]</span>; 
+                biển số  <span class="html_key" id="vehiclePlateNum_2_1_key">[...]</span>; 
+                của chủ sở hữu (bên bảo đảm) là <span class="html_key" id="vehicleOwner_2_1_key">[...]</span>; 
+                thuộc số đăng ký biện pháp bảo đảm <span class="html_key" id="ensuranceRegNum_2_1_key">[...]</span>; 
+                thời điểm đăng ký <span class="html_key" id="ensuranceRegTime_2_1_key">[...]</span>; 
+                thế chấp tại <span class="html_key" id="mortgageAt_2_1_key">[...]</span> 
+                đến <span class="html_key" id="mortgageTo_2_1_key">[...]</span> 
+            </p>
+            <p class="tx14 txindent">
+                - Đối với tàu cá, phương tiện giao thông đường thủy nội địa: Số đăng ký (nếu có), 
+                cơ quan cấp Giấy chứng nhận đăng ký, nhãn hiệu (nếu có), cấp phương tiện 
+                <span class="html_key" id="vehicleId_2_2_key">[...]</span>  
+                của chủ sở hữu (bên bảo đảm) là <span class="html_key" id="vehicleOwner_2_2_key">[...]</span> ; 
+                thuộc số đăng ký biện pháp bảo đảm <span class="html_key" id="ensuranceRegNum_2_2_key">[...]</span>; 
+                thời điểm đăng ký <span class="html_key" id="ensuranceRegTime_2_2_key">[...]</span>; 
+                thế chấp tại <span class="html_key" id="mortgageAt_2_2_key">[...]</span> 
+                đến <span class="html_key" id="mortgageTo_2_2_key">[...]</span> 
+                (tên và địa chỉ của cơ quan đăng ký phương tiện thủy nội địa). 
+            </p>
+            <p class="tx14 txindent">
+                - Đối với phương tiện giao thông đường sắt: 
+                Phương tiện <span class="html_key" id="vehicleName_2_3_key">[...]</span>;  
+                số đăng ký (nếu có), cơ quan cấp Giấy chứng nhận đăng ký, nhãn hiệu (nếu có)
+                <span class="html_key" id="vehicleId_2_3_key">[...]</span> 
+                của chủ sở hữu (bên bảo đảm) là <span class="html_key" id="vehicleOwner_2_3_key">[...]</span> ; 
+                thuộc số đăng ký biện pháp bảo đảm <span class="html_key" id="ensuranceRegNum_2_3_key">[...]</span>; 
+                thời điểm đăng ký <span class="html_key" id="ensuranceRegTime_2_3_key">[...]</span>; 
+                thế chấp tại <span class="html_key" id="mortgageAt_2_3_key">[...]</span> 
+                đến <span class="html_key" id="mortgageTo_2_3_key">[...]</span> 
+                (tên và địa chỉ của cơ quan đăng ký phương tiện giao thông đường sắt). 
+            </p>
+            <p class="tx14 txindent">
+                2.2. Đề nghị quý Trung tâm gửi yêu cầu thông báo kèm bản sao Văn bản chứng nhận đăng ký 
+                bằng <span class="html_key" id="recvMethod_key">[...]</span> đến cơ quan đăng ký quyền sở hữu, quyền lưu 
+                hành phương tiện giao thông.
+            </p>
+            <p class="tx14 txindent">Xin trân trọng cảm ơn sự hợp tác của quý Trung tâm.</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border tx14">
+                <tr>
+                    <td>
+                    </td>
+                    <td style="width: 60%">
+                        <p class="txcenter bold">NGƯỜI YÊU CẦU</p>
+                        <p class="txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), </p>
+                        <p class="txcenter italic">đóng dấu (nếu có)</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addHeading(type) {
+                const contentDiv = document.getElementById('allvoice');
+                const newHeading = document.createElement('div');
+                newHeading.className = `${type} heading`;
+                newHeading.setAttribute('contenteditable', 'true');
+                newHeading.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newHeading);
+            }
+
+            function addSameLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const newHeading = document.createElement('div');
+                        newHeading.className = node.className;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            function addSubLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                        let currentLevel = levels.findIndex(level => node.classList.contains(level));
+
+                        if (currentLevel < levels.length - 1) {
+                            currentLevel++;
+                        }
+
+                        const newHeading = document.createElement('div');
+                        newHeading.className = `${levels[currentLevel]} heading`;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            window.addHeading = addHeading;
+            window.addSameLevel = addSameLevel;
+            window.addSubLevel = addSubLevel;
+
+            window.addBulletPoint = function () {
+                const contentDiv = document.getElementById('allvoice');
+                const newBullet = document.createElement('div');
+                newBullet.className = 'bullet bullet-level-1';
+                newBullet.setAttribute('contenteditable', 'true');
+                newBullet.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newBullet);
+            };
+
+            window.toggleCounter = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        node.classList.toggle('no-counter');
+                        if (node.classList.contains('no-counter')) {
+                            node.style.marginLeft = '0';
+                        } else {
+                            adjustHeadingLevel(node, 0); // Đảm bảo chỉ mục được căn chỉnh lại
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.increaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, 1);
+                        } else {
+                            adjustHeadingLevel(node, 1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.decreaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, -1);
+                        } else {
+                            adjustHeadingLevel(node, -1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.addNewLine = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                const newLine = document.createElement('p');
+                newLine.className = 'new-line';
+                newLine.setAttribute('contenteditable', 'true');
+                newLine.setAttribute('tabindex', '0');
+                newLine.textContent = 'Dòng mới'; // Nội dung mặc định, có thể thay đổi
+
+                const parentNode = range.startContainer;
+                let referenceNode = parentNode;
+
+                while (referenceNode && referenceNode.parentNode !== document.getElementById('allvoice')) {
+                    referenceNode = referenceNode.parentNode;
+                }
+
+                if (referenceNode && referenceNode.parentNode === document.getElementById('allvoice')) {
+                    referenceNode.parentNode.insertBefore(newLine, referenceNode.nextSibling);
+
+                    const newLineRange = document.createRange();
+                    newLineRange.setStart(newLine, 0);
+                    newLineRange.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(newLineRange);
+                }
+            };
+
+            function adjustBulletLevel(element, direction) {
+                const currentLevel = element.classList.contains('bullet-level-2') ? 2 : 1;
+                const newLevel = Math.max(1, Math.min(2, currentLevel + direction));
+                element.classList.remove(`bullet-level-${currentLevel}`);
+                element.classList.add(`bullet-level-${newLevel}`);
+            }
+
+            function adjustHeadingLevel(element, direction) {
+                const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                let currentLevel = levels.findIndex(level => element.classList.contains(level));
+
+                if (currentLevel === -1) return;
+
+                const newLevel = Math.max(0, Math.min(levels.length - 1, currentLevel + direction));
+
+                if (newLevel !== currentLevel) {
+                    element.classList.remove(levels[currentLevel]);
+                    element.classList.add(levels[newLevel]);
+                }
+            }
+        });
+        document.getElementById('editor').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addNewLine();
+            }
+        });
+
+        window.addHeading = addHeading;
+        window.addBulletPoint = function () {
+            const contentDiv = document.getElementById('allvoice');
+            const newBullet = document.createElement('div');
+            newBullet.className = 'bullet bullet-level-1';
+            newBullet.setAttribute('contenteditable', 'true');
+            newBullet.setAttribute('tabindex', '0');
+            contentDiv.appendChild(newBullet);
+        };
+
+    </script>
+</body>

@@ -1,0 +1,596 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="doc_management_style.css" />
+</head>
+
+<body>
+    <div class="dropdown" style="z-index: 9999">
+        <button class="dropbtn">Chọn hành động</button>
+        <div class="dropdown-content">
+            <button onclick="addHeading('section')">Thêm Điều</button>
+            <button onclick="addSameLevel()">Thêm mục cùng cấp</button>
+            <button onclick="addSubLevel()">Thêm cấp con</button>
+            <button onclick="addBulletPoint()">Thêm gạch đầu dòng</button>
+            <button onclick="addNewLine()">Thêm dòng mới</button>
+            <button onclick="toggleCounter()">Bật/Tắt đánh số tại mục</button>
+            <button onclick="increaseLevel()">Tăng cấp chỉ mục</button>
+            <button onclick="decreaseLevel()">Giảm cấp chỉ mục</button>
+        </div>
+    </div>
+
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container" id="allvoice">
+            <p style="text-align: right">
+                <b>Mẫu số 01d</b>
+            </p>
+            <p class="tx14 bold txcenter">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <p class="tx14 bold txcenter">Độc lập - Tự do - Hạnh phúc
+                <hr style="width: 30%" />
+            </p>
+            <p class="tx14 txcenter"><i>........, ngày........ tháng........ năm.........</i></p>
+            <p>&nbsp;</p>
+            <table>
+                <tr>
+                    <td rowspan="2" style="border: none">
+                        <p class="tx14 bold txcenter txcondensed">
+                            PHIẾU YÊU CẦU ĐĂNG KÝ BIỆN PHÁP BẢO ĐẢM BẰNG ĐỘNG SẢN, CÂY HẰNG NĂM, CÔNG TRÌNH TẠM
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>
+                            Kính gửi : Trung tâm đăng ký giao dịch, tài sản tại <span class="html_key"
+                                id="sendTo_key">[...]</span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="tx13 bold txcenter txcondensed">PHẦN GHI CỦA CƠ QUAN ĐĂNG KÝ</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tx13">
+                        <p class="bold">Số tiếp nhận:</p>
+                        <p>Thời điểm tiếp nhận:
+                            <i><span class="html_key" id="recvHour_key">[...]</span> giờ
+                            <span class="html_key" id="recvMinute_key">[...]</span> phút
+                            ngày <span class="html_key" id="recvDay_key">[...]</span>
+                            tháng <span class="html_key" id="recvMonth_key">[...]</span>
+                            năm <span class="html_key" id="recvYear_key">[...]</span></i>
+                        </p>
+                        <p class="txcenter bold">Người tiếp nhận</p>
+                        <p class="txcenter italic">(Ký và ghi rõ họ, tên)</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="tx13">
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">1. Thông tin chung</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>1.1. Biện pháp bảo đảm</p>
+                        <table class="table-no-border tx13">
+                            <tr>
+                                <td>
+                                    <p>&squ; Thế chấp</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Cầm cố</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Đặt cọc</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>&squ; Bảo lưu quyền sở hữu</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Ký cược</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Ký quỹ</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            1.2. Người yêu cầu đăng ký
+                        </p>
+                        <table class="table-no-border">
+                            <tr>
+                                <td>&squ; Bên nhận bảo đảm</td>
+                                <td>&squ; Bên bảo đảm</td>
+                                <td>&squ; Quản tài viên/Doanh nghiệp quản lý,
+                                    thanh lý tài sản</td>
+                            </tr>
+                        </table>
+                        <p>
+                            Chi nhánh của pháp nhân, người đại diện
+                        </p>
+                        <p>
+                            1.3. Mã số tài khoản đăng ký trực tuyến <i>(nếu có)</i>
+                            <span class="html_key" id="accId"></span>
+                        </p>
+                        <table class="table-no-border tx13">
+                            <tr>
+                                <td style="width: 35%;">1.4. Nhận kết quả đăng ký:</td>
+                                <td>
+                                    <p>&squ; Trực tiếp tại cơ quan đăng ký</p>
+                                    <p class="txcondensed">&squ; Qua dịch vụ bưu chính <i>(ghi tên và địa chỉ người nhận)</i></p>
+                                    <p>.........................................</p>
+                                    <p>&squ; Cách thức điện tử <i>(nếu pháp luật quy định)</i></p>
+                                    <p>.........................................</p>
+                                    <p>&squ; Cách thức khác <i>(nếu được cơ quan đăng ký đồng ý)</i></p>
+                                    <p>.........................................</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>1.5. Địa chỉ để cơ quan đăng ký liên hệ khi cần thiết:</p>
+                        <p>Họ và tên: <span class="html_key" id="aplierFullName_key">[...]</span>
+                            Số điện thoại: <span class="html_key" id="aplierPhone_key">[...]</span></p>
+                        <p>Thư điện tử <i>(nếu có)</i><span class="html_key" id="aplierEmail_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p><b>2. Hợp đồng bảo đảm: </b> <span class="html_key" id="contract_2_key">[...]</span>;
+                            số <i>(nếu có): </i> <span class="html_key" id="contractId_2_key">[...]</span></p>
+                        <p>Thời điểm có hiệu lực:
+                            ngày <span class="html_key" id="contractDay_2_key">[...]</span>
+                            tháng <span class="html_key" id="contractMonth_2_key">[...]</span>
+                            năm <span class="html_key" id="contractYear_2_key">[...]</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">3. Bên bảo đảm</p>
+                        <p>Họ và tên đầy đủ đối với cá nhân /tên đầy đủ đối với tổ chức
+                            <i>(viết chữ IN HOA): </i>
+                        </p>
+                        <p><span class="html_key" id="guarantorNameCap_key">[...]</span></p>
+                        <p>Địa chỉ: <span class="html_key" id="guarantorAddress_key">[...]</span></p>
+                        <p>Giấy tờ xác định tư cách pháp lý</p>
+                        <table class="table-no-border tx13">
+                            <tr>
+                                <td>
+                                    <p>&squ; Chứng minh nhân dân/ Căn cước công dân/ Chứng minh quân đội</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Hộ chiếu</p>
+                                </td>
+                                <td> 
+                                    <p>&squ; Thẻ thường trú</p>
+                                </td>
+                                <td>
+                                    <p>&squ; Mã số thuế</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Số <span class="html_key" id="guarantorLegalDocId_key">[...]</span>
+                            do <span class="html_key" id="guarantorLegalDocIssueBy_key">[...]</span>
+                            cấp ngày <span class="html_key" id="guarantorLegalDocDay_key">[...]</span>
+                            /<span class="html_key" id="guarantorLegalDocMonth_key">[...]</span>
+                            /<span class="html_key" id="guarantorLegalDocYear_key">[...]</span></p>
+                        <p>Thuộc đối tượng không phải nộp phí đăng kí &squ;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">4. Bên nhận bảo đảm</p>
+                        <p>4.1. Họ và tên đầy đủ đối với cá nhân /tên đầy đủ đối với tổ chức: <i>(viết chữ IN HOA)</i>
+                        </p>
+                        <p><span class="html_key" id="beneficiaryNameCap_key">[...]</span></p>
+                        <p>Địa chỉ:</p>
+                        <p><span class="html_key" id="beneficiaryAddress_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>
+                            <b>5. Mô tả tài sản bảo đảm</b>
+                        </p>
+                        <p>
+                            <b>5.1. Phương tiện giao thông và yêu cầu thông báo thế chấp liên quan đến tài sản này
+                                (nếu kê khai tại điểm này thì không kê khai tại điểm 5.2)</b>
+                        </p>
+                        <p>(i) Phương tiện giao thông cơ giới đường bộ: </p>
+                        <table id="tbl_5_i_key">
+                            <tr class="txcenter bold">
+                                <td rowspan="2" style="width: 30px;">
+                                    <p>TT</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Tên phương tiện, nhãn hiệu, màu sơn</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Số khung</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Biển số</p>
+                                    <p>(nếu có)</p>
+                                </td>
+                                <td colspan="3">
+                                    <p>Yêu cầu thông báo thế chấp</p>
+                                </td>
+                            </tr>
+                            <tr class="txcenter bold">
+                                <td>
+                                    <p>Yêu cầu thông báo bằng bản giấy</p>
+                                </td>
+                                <td>
+                                    <p>Yêu cầu thông báo bằng bản điện tử</p>
+                                </td>
+                                <td>
+                                    <p>Tên và địa chỉ cơ quan tiếp nhận thông báo</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            (ii) Tàu cá, phương tiện giao thông đường thủy nội địa, phương tiện giao thông đường sắt,
+                            phương tiện chuyên dùng trên đường bộ, đường thủy, đường sắt:
+                        </p>
+                        <table id="tbl_5_ii_key">
+                            <tr class="txcenter bold">
+                                <td rowspan="2" style="width: 30px;">
+                                    <p>TT</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Tên phương tiện, nhãn hiệu (nếu có)</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Chủ phương tiện/chủ sở hữu phương tiện</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Số đăng ký (nếu có), cơ quan cấp Giấy chứng nhận đăng ký</p>
+                                </td>
+                                <td rowspan="2">
+                                    <p>Cấp phương tiện(nếu có)</p>
+                                </td>
+                                <td colspan="3">
+                                    <p>Yêu cầu thông báo thế chấp</p>
+                                </td>
+                            </tr>
+                            <tr class="txcenter bold">
+                                <td>
+                                    <p>Yêu cầu thông báo bằng bản giấy</p>
+                                </td>
+                                <td>
+                                    <p>Yêu cầu thông báo bằng bản điện tử</p>
+                                </td>
+                                <td>
+                                    <p>Tên và địa chỉ cơ quan tiếp nhận thông báo</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>5.2. Hàng hóa luân chuyển trong quá trình sản xuất kinh doanh, kho hàng:</p>
+                        <p>(i) Hàng hóa luân chuyển trong quá trình sản xuất kinh doanh :</p>
+                        <p>Tên hàng hóa: <span class="html_key" id="productName_key">[...]</span></p>
+                        <p>Giá trị hàng hóa &squ;</p>
+                        <p><span class="html_key" id="productValue_key">[...]</span></p>
+                        <p>Loại hàng hóa &squ;</p>
+                        <p><span class="html_key" id="productType_key">[...]</span></p>
+                        <p>(ii) Kho hàng:</p>
+                        <p><span class="html_key" id="warehouse_key">[...]</span></p>
+                        <p>Địa chỉ hoặc số hiệu kho hoặc dấu hiệu khác của vị trí kho hàng: </p>
+                        <p><span class="html_key" id="warehouseAddress_key">[...]</span></p>
+                        <p>5.3. Cây hằng năm, công trình tạm: </p>
+                        <p><span class="html_key" id="annualPlantOrTempConst_key">[...]</span></p>
+                        <p>5.4. Quyền tài sản </p>
+                        <p>Tên quyền tài sản được dùng để bảo đảm: <span class="html_key"
+                                id="assetRightName_key">[...]</span></p>
+                        <p>(i) Quyền tài sản phát sinh từ hợp đồng</p>
+                        <p>- Hợp đồng: <span class="html_key" id="contract_5_4_i_key">[...]</span>;
+                            số (nếu có): <span class="html_key" id="contractId_5_4_i_key">[...]</span>; </p>
+                        <p>Thời điểm có hiệu lực:
+                            ngày <span class="html_key" id="day_5_4_i_key">[...]</span>
+                            tháng <span class="html_key" id="month_5_4_i_key">[...]</span>
+                            năm <span class="html_key" id="year_5_4_i_key">[...]</span>
+                        </p>
+                        <p>- Các bên tham gia xác lập hợp đồng: <span class="html_key"
+                                id="stakeholder_5_4_i_key">[...]</span></p>
+                        <p>(ii) Quyền tài sản phát sinh từ căn cứ khác</p>
+                        <p>- Tên căn cứ: <span class="html_key" id="basis_5_4_ii_key">[...]</span></p>
+                        <p>- Tên chủ thể ban hành căn cứ: <span class="html_key"
+                                id="basisProvider_5_4_ii_key">[...]</span></p>
+                        <p>- Số căn cứ <i>(nếu có)</i>: <span class="html_key" id="basisId_5_4_ii_key">[...]</span>
+                            thời điểm có hiệu lực hoặc thời điểm ký:
+                            ngày <span class="html_key" id="basisDay_5_4_ii_key">[...]</span>
+                            tháng <span class="html_key" id="basisMonth_5_4_ii_key">[...]</span>
+                            năm <span class="html_key" id="basisYear_5_4_ii_key">[...]</span>
+                        </p>
+                        <p>5.5. Chứng khoán không đăng ký tập trung:</p>
+                        <p><span class="html_key" id="unregCentrlStock_5_5_key">[...]</span></p>
+                        <p>5.6. Động sản khác:</p>
+                        <p><span class="html_key" id="otherRealEstate_5_6_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tx13">
+                        <p><b>6. Giấy tờ kèm theo :</b></p>
+                        <p><span class="html_key" id="attachedDoc_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tx13 bold">
+                        <p>Người yêu cầu đăng ký chịu trách nhiệm trước pháp luật về
+                            trung thực trong kê khai và về tính chính xác của thông tin được kê khai trong Phiếu yêu
+                            cầu này.</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border">
+                <tr>
+                    <td>
+                        <p class="tx13 txcenter bold">BÊN BẢO ĐẢM</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), </p>
+                        <p class="tx13 txcenter italic">đóng dấu (nếu có)</p>
+                    </td>
+                    <td>
+                        <p class="tx13 txcenter bold">BÊN NHẬN BẢO ĐẢM</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), </p>
+                        <p class="tx13 txcenter italic">đóng dấu (nếu có)</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border">
+                <tr>
+                    <td>
+                        <p class="tx13 txcenter bold">QUẢN TÀI VIÊN/DOANH NGHIỆP</p>
+                        <p class="tx13 txcenter bold">QUẢN LÝ, THANH LÝ TÀI SẢN</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), đóng dấu (nếu có)</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p class="tx14 txcenter"><b>HƯỚNG DẪN CHUNG</b></p>
+            <p class="tx14 txindent">1. Nội dung kê khai phải trung thực, đầy đủ, chính xác.</p>
+            <p class="tx14 txindent">2. Đối với phần kê khai có lựa chọn thì đánh dấu (X) vào ô vuông tương ứng được lựa
+                chọn.</p>
+            <p class="tx14 txindent">3. Gạch chéo đối với mục không có thông tin kê khai trên Phiếu yêu cầu đăng ký.</p>
+            <p class="tx14 txindent">4. Thông tin được kê khai, nội dung liên quan trong Phiếu yêu cầu có thể được thể
+                hiện trên nhiều trang.
+                Trường hợp này, các trang phải được đánh số thứ tự và người yêu cầu đăng ký phải ký nháy vào từng trang.
+            </p>
+            <p class="tx14 txindent">5. Trường hợp có nhiều tài sản bảo đảm khác nhau nhưng có thể kê khai chung theo
+                tính chất,
+                đặc điểm của các tài sản đó thì người yêu cầu đăng ký có quyền lựa chọn kê khai chung về
+                những tài sản đó hoặc kê khai chi tiết về từng tài sản.</p>
+            <p class="tx14 txindent">
+                Trường hợp tài sản bảo đảm tại các mục 5.1; 5.2; 5.3; 5.4 là tài sản hình thành trong
+                tương lai thì kê khai tại Mục 5.6, phù hợp với quy định tại Điều 45 Nghị định số 99/2022/NĐ-CP.
+            </p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addHeading(type) {
+                const contentDiv = document.getElementById('allvoice');
+                const newHeading = document.createElement('div');
+                newHeading.className = `${type} heading`;
+                newHeading.setAttribute('contenteditable', 'true');
+                newHeading.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newHeading);
+            }
+
+            function addSameLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const newHeading = document.createElement('div');
+                        newHeading.className = node.className;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            function addSubLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                        let currentLevel = levels.findIndex(level => node.classList.contains(level));
+
+                        if (currentLevel < levels.length - 1) {
+                            currentLevel++;
+                        }
+
+                        const newHeading = document.createElement('div');
+                        newHeading.className = `${levels[currentLevel]} heading`;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            window.addHeading = addHeading;
+            window.addSameLevel = addSameLevel;
+            window.addSubLevel = addSubLevel;
+
+            window.addBulletPoint = function () {
+                const contentDiv = document.getElementById('allvoice');
+                const newBullet = document.createElement('div');
+                newBullet.className = 'bullet bullet-level-1';
+                newBullet.setAttribute('contenteditable', 'true');
+                newBullet.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newBullet);
+            };
+
+            window.toggleCounter = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        node.classList.toggle('no-counter');
+                        if (node.classList.contains('no-counter')) {
+                            node.style.marginLeft = '0';
+                        } else {
+                            adjustHeadingLevel(node, 0); // Đảm bảo chỉ mục được căn chỉnh lại
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.increaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, 1);
+                        } else {
+                            adjustHeadingLevel(node, 1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.decreaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, -1);
+                        } else {
+                            adjustHeadingLevel(node, -1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.addNewLine = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                const newLine = document.createElement('p');
+                newLine.className = 'new-line';
+                newLine.setAttribute('contenteditable', 'true');
+                newLine.setAttribute('tabindex', '0');
+                newLine.textContent = 'Dòng mới'; // Nội dung mặc định, có thể thay đổi
+
+                const parentNode = range.startContainer;
+                let referenceNode = parentNode;
+
+                while (referenceNode && referenceNode.parentNode !== document.getElementById('allvoice')) {
+                    referenceNode = referenceNode.parentNode;
+                }
+
+                if (referenceNode && referenceNode.parentNode === document.getElementById('allvoice')) {
+                    referenceNode.parentNode.insertBefore(newLine, referenceNode.nextSibling);
+
+                    const newLineRange = document.createRange();
+                    newLineRange.setStart(newLine, 0);
+                    newLineRange.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(newLineRange);
+                }
+            };
+
+            function adjustBulletLevel(element, direction) {
+                const currentLevel = element.classList.contains('bullet-level-2') ? 2 : 1;
+                const newLevel = Math.max(1, Math.min(2, currentLevel + direction));
+                element.classList.remove(`bullet-level-${currentLevel}`);
+                element.classList.add(`bullet-level-${newLevel}`);
+            }
+
+            function adjustHeadingLevel(element, direction) {
+                const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                let currentLevel = levels.findIndex(level => element.classList.contains(level));
+
+                if (currentLevel === -1) return;
+
+                const newLevel = Math.max(0, Math.min(levels.length - 1, currentLevel + direction));
+
+                if (newLevel !== currentLevel) {
+                    element.classList.remove(levels[currentLevel]);
+                    element.classList.add(levels[newLevel]);
+                }
+            }
+        });
+        document.getElementById('editor').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addNewLine();
+            }
+        });
+
+        window.addHeading = addHeading;
+        window.addBulletPoint = function () {
+            const contentDiv = document.getElementById('allvoice');
+            const newBullet = document.createElement('div');
+            newBullet.className = 'bullet bullet-level-1';
+            newBullet.setAttribute('contenteditable', 'true');
+            newBullet.setAttribute('tabindex', '0');
+            contentDiv.appendChild(newBullet);
+        };
+
+    </script>
+</body>

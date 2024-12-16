@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.3.0/tinymce.min.js"
+		integrity="sha512-Rk0YyXzLL9t1V616RO02efJR0iiQyyRma7Rrk8yHMjlolX/NiJ5oZVJRhAfgd+/c7c0K3ibj+CmPyMmqEbUvZw=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+	<!-- Nút thêm nội dung -->
+	<button id="addContentButton">Thêm nội dung</button>
+
+	<!-- Text editor area -->
+	<textarea id="myTextarea">
+        <div class="container" id="myElementId">
+			<h1>hehehehehe</h1>
+		</div>
+    </textarea>
+
+	<script>
+		// Khởi tạo TinyMCE
+		tinymce.init({
+			selector: '#myTextarea',
+			setup: function (editor) {
+				// Gắn sự kiện cho nút khi editor đã sẵn sàng
+				editor.on('init', function () {
+					document.getElementById('addContentButton').addEventListener('click', function () {
+						// Gọi hàm thêm HTML sau phần tử
+						addHtmlAfterElement(editor, 'myElementId', '<p>Nội dung mới</p>');
+					});
+				});
+			}
+		});
+
+		// Hàm thêm HTML vào sau phần tử có ID cụ thể
+		function addHtmlAfterElement(editor, id, htmlString) {
+			// Lấy nội dung hiện tại trong TinyMCE
+			const content = editor.getContent();
+
+			// Chuyển nội dung thành DOM để thao tác
+			const parser = new DOMParser();
+			const doc = parser.parseFromString(content, 'text/html');
+			const targetElement = doc.getElementById(id);
+
+			if (targetElement) {
+				// Tạo một phần tử tạm để chèn HTML
+				const tempDiv = document.createElement('div');
+				tempDiv.innerHTML = htmlString;
+
+				// Duyệt qua các child nodes và thêm sau phần tử mục tiêu
+				const parent = targetElement.parentNode;
+				let nextSibling = targetElement.nextSibling;
+
+				Array.from(tempDiv.childNodes).forEach(node => {
+					parent.insertBefore(node, nextSibling);
+				});
+
+				// Chuyển đổi lại DOM thành chuỗi HTML và cập nhật nội dung TinyMCE
+				editor.setContent(doc.body.innerHTML);
+			} else {
+				console.warn(`Không tìm thấy phần tử với ID: ${id}`);
+			}
+		}
+	</script>
+</body>
+
+</html>

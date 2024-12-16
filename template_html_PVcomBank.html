@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* Dùng để bỏ margin tự động khi xuất PDF */
+    @page {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        /* Có thể thêm cả số trang khi xuất PDF */
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+        color: #888;
+        text-decoration: none;
+    }
+
+    body {
+        font-family: "Times New Roman";
+        color: #000;
+        font-weight: normal;
+        background: #f0f0f0;
+        width: 100%;
+        line-height: 20px;
+        text-align: justify;
+        margin: 0 auto;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span {
+        font-family: "Times New Roman";
+        margin: 0;
+    }
+
+    /* Kích cỡ khổ A4 */
+    .container {
+        width: 210mm;
+        height: auto;
+        padding: 25mm 20mm 350mm 35mm;
+        background: #FFF;
+        margin: 0 auto;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 12px;
+    }
+
+    /* In đậm */
+    .bold {
+        font-weight: bold;
+    }
+
+    /* In nghiêng */
+    .italic {
+        font-style: italic;
+    }
+
+    .tx9 {
+        font-size: 9px;
+        font-weight: normal;
+    }
+
+    .tx12 {
+        font-size: 12px;
+    }
+
+    /* font-size 12 in đậm */
+    .tx12bold {
+        font-size: 12px;
+        font-weight: bold;
+    }
+
+    /* font-size 12 in đậm */
+    .tx12bolditalic {
+        font-size: 12px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .tx13 {
+        font-size: 13px;
+    }
+
+    /* font-size 13 in nghiêng */
+    .tx13italic {
+        font-size: 13px;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    /* font-size 13 in đậm */
+    .tx13bold {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    /* font-size 14 */
+    .tx14bold {
+        font-size: 14px;
+    }
+
+    /* font-size 14 in đậm */
+    .tx14bold {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    /* Căn giữa */
+    .txcenter {
+        text-align: center;
+    }
+
+    /* Căn phải */
+    .txright {
+        text-align: right;
+    }
+
+    /* Căn trái */
+    .txleft {
+        text-align: left;
+    }
+
+    /* Thụt đầu dòng đoạn văn */
+    .txindent {
+        text-indent: 10mm;
+    }
+
+    /* Gạch chân chữ */
+    .underline {
+        border-bottom: 2px solid #000;
+        width: 50mm;
+    }
+
+    /* Đường kẻ dưới, áp dụng thêm style="width=xx%" tùy chỗ */
+    hr {
+        border: none;
+        height: 0.5px;
+        color: black;
+        background-color: black;
+    }
+
+    /* Bảng, đã được căn các cột đều nhau */
+    table {
+        width: 100%;
+        text-indent: 0;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    table td,
+    table th {
+        border: solid 1.5px black;
+        padding: 3px;
+        vertical-align: top;
+    }
+
+    /* Bảng không có viền */
+    .table-no-border td,
+    .table-no-border th {
+        border: none !important;
+    }
+</style>
+
+<body>
+    <!-- editor cho Trumbowyg -->
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container">
+            <!-- Cơ quan nằm cạnh Quốc hiệu tiêu ngữ -->
+            <p style="color:red;">*Cơ quan nằm cạnh Quốc hiệu tiêu ngữ</p>
+            <table class="table-no-border">
+                <tr>
+                    <td class="txcenter">
+                        <p class="tx12 bold">NGÂN HÀNG THƯƠNG MẠI CỔ PHẦN</p>
+                        <p class="tx12 bold">
+                            ĐẠI CHÚNG VIỆT NAM - <span id="branchCode_key">[...]</span>
+                            <hr style="width: 40%;" />
+                        </p>
+                    </td>
+                    <td class="txcenter">
+                        <p class="tx12 bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                        <p class="tx12 bold">Độc lập - Tự do - Hạnh phúc
+                            <hr style="width: 40%;" />
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!-- Quốc hiệu tiêu ngữ nằm giữa -->
+            <p style="color:red;">*Quốc hiệu tiêu ngữ nằm giữa</p>
+            <p class="tx12 bold txcenter"><b>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</b></p>
+            <p class="tx12 bold txcenter">
+                Độc lập - Tự do - Hạnh phúc
+                <hr style="width: 20%;" />
+            </p>
+            <!-- Dòng trắng -->
+            <p style="color:red;">*Dòng trắng dùng &lt;p&gt; &amp;nbsp; &lt;/p&gt;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <!-- Các cột checkbox -->
+            <p>&nbsp;</p>
+            <p style="color:red;">*Các hàng checkbox</p>
+            <p style="font-style: italic;">Nếu trường hợp người có thể edit
+                Trumbowyg thêm dòng mới thì tạo 2 bảng riêng cho mỗi hàng ngang</p>
+            <table class="table-no-border">
+                <tr>
+                    <td colspan="2">
+                        <p class="tx12">&squ; Option này rất dài nên sẽ dùng colspan = 2
+                            để hiển thị riêng trên một dòng nếu tài liệu yêu cầu</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="tx12">&squ; Bên nhận bảo đảm</p>
+                    </td>
+                    <td>
+                        <p class="tx12">&squ; Bên bảo đảm</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="tx12">&squ; Quản tài viên /Doanh nghiệp quản lý, thanh lý tài sản</p>
+                    </td>
+                    <td>
+                        <p class="tx12">&squ; Chi nhánh của pháp nhân, người đại diện</p>
+                    </td>
+                </tr>
+            </table>
+            <!-- Các cột checkbox -->
+            <p>&nbsp;</p>
+            <p style="color:red;">*Cụm thông tin thẳng hàng</p>
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx12" style="width: 20%;">Họ và tên:</td>
+                    <td class="tx12"><span id="name_key">[...]</span></td>
+                </tr>
+                <tr>
+                    <td class="tx12" style="width: 20%;">Địa chỉ:</td>
+                    <td class="tx12"><span id="name_key">[...]</span></td>
+                </tr>
+            </table>
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx12" style="width: 20%;">Điện thoại:</td>
+                    <td class="tx12"><span id="phone_key">[...]</span></td>
+                    <td class="tx12" style="width: 10%;">Fax:</td>
+                    <td class="tx12" style="width: 40%;"><span id="fax_key">[...]</span></td>
+                </tr>
+            </table>
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx12" style="width: 20%;">Chức vụ:</td>
+                    <td class="tx12"><span id="name_key">[...]</span></td>
+                </tr>
+            </table>
+
+            <!-- Đoạn văn bản -->
+            <p>&nbsp;</p>
+            <p style="color:red;">*Đoạn văn bản</p>
+            <p>
+                Bằng văn bản này, Ngân Hàng chúng tôi xin thông báo với Quý cơ quan và
+                đề nghị Quý cơ quan làm thủ tục giải chấp tài sản đảm bảo và chuyển quyền thụ
+                hưởng tài sản đảm bảo nêu trên để tạo điều kiện cho Bên thế chấp có thể thực
+                hiện được các giao dịch sau này.
+            </p>
+
+            <!-- Đoạn văn bản thụt dòng -->
+            <p>&nbsp;</p>
+            <p style="color:red;">*Đoạn văn bản thụt dòng</p>
+            <p class="tx12 txindent">
+                1. Thông tin được kê khai, nội dung liên quan trong Phiếu yêu cầu có thể được thể hiện trên nhiều trang.
+                Trường hợp này, các trang phải được đánh số thứ tự và người yêu cầu đăng ký phải ký nháy vào từng trang.
+            </p>
+            <p class="tx12 txindent">
+                2. Trường hợp có nhiều tài sản bảo đảm khác nhau nhưng có thể kê khai chung theo tính chất, đặc điểm của
+                các
+                tài sản đó thì người yêu cầu đăng ký có quyền lựa chọn kê khai chung về những tài sản đó hoặc kê khai
+                chi
+                tiết về từng tài sản
+            </p>
+
+            <!-- Ô kí tên ngang hàng -->
+            <p>&nbsp;</p>
+            <p style="color:red;">*Ô kí tên ngang hàng</p>
+            <p class="italic">Chỗ nào dài quá thì chủ động tách dòng mới (VD như BÊN NHẬN BẢO ĐẢM bên dưới)</p>
+            <table class="table-no-border">
+                <tr>
+                    <td class="txcenter">
+                        <p class="tx12 bold">BÊN BẢO ĐẢM</p>
+                        <p class="tx12 bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx12">Ký, ghi rõ họ và tên, chức danh (nếu có), đóng dấu (nếu có)</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                    <td class="txcenter">
+                        <p class="tx12 bold">BÊN NHẬN BẢO ĐẢM</p>
+                        <p class="tx12 bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx12">Ký, ghi rõ họ và tên, chức danh (nếu có),</p>
+                        <p class="tx12">đóng dấu (nếu có)</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- Ô kí tên bên phải -->
+            <p>&nbsp;</p>
+
+            <p style="color:red;">*Ô kí tên bên phải</p>
+            <table class="table-no-border">
+                <tr>
+                    <td></td>
+                    <td class="txcenter" style="width: 70%;">
+                        <p class="tx12 bold">BÊN BẢO ĐẢM</p>
+                        <p class="tx12 bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx12">Ký, ghi rõ họ và tên, chức danh (nếu có), đóng dấu (nếu có)</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

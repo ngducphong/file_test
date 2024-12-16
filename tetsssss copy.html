@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" class="ie-edge dj_webkit dj_chrome dj_contentbox">
+
+<head>
+    <style>
+        /* Dùng để bỏ margin tự động khi xuất PDF */
+        @page {
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            /* Có thể thêm cả số trang khi xuất PDF */
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:active,
+        a:focus {
+            color: #888;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: "Times New Roman";
+            color: #000;
+            font-weight: normal;
+            background: #f0f0f0;
+            width: 100%;
+            line-height: 30px;
+            /* text-align: justify; */
+            margin: 0 auto;
+        }
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            font-family: "Times New Roman";
+            margin: 0;
+        }
+
+        /* Kích cỡ khổ A4 */
+        .container {
+            white-space: normal;
+            /* Cho phép xuống dòng tự động */
+            word-wrap: break-word;
+            width: 210mm;
+            height: auto;
+            padding: 25mm 18mm 35mm 22mm;
+            background: rgb(255, 255, 255);
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+            font-size: 16px;
+        }
+
+        /* In đậm */
+        .bold {
+            font-weight: bold;
+        }
+
+        /* In nghiêng */
+        .italic {
+            font-style: italic;
+        }
+
+        .tx9 {
+            font-size: 9px;
+            font-weight: normal;
+        }
+
+        .tx12 {
+            font-size: 16px;
+        }
+
+        /* font-size 12 in đậm */
+        .tx12bold {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* font-size 12 in đậm */
+        .tx12bolditalic {
+            font-size: 16px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .tx13 {
+            font-size: 17px;
+        }
+
+        /* font-size 13 in nghiêng */
+        .tx13italic {
+            font-size: 17px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        /* font-size 13 in đậm */
+        .tx13bold {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* font-size 14 */
+        .tx14 {
+            font-size: 18.6px;
+        }
+
+        /* font-size 14 in đậm */
+        .tx14bold {
+            font-size: 18.6px;
+            font-weight: bold;
+        }
+
+        /* Căn giữa */
+        .txcenter {
+            text-align: center;
+        }
+
+        /* Căn phải */
+        .txright {
+            text-align: right;
+        }
+
+        /* Căn trái */
+        .txleft {
+            text-align: left;
+        }
+
+        /* Thụt đầu dòng đoạn văn */
+        .txindent {
+            text-indent: 10mm;
+        }
+
+        /* Gạch chân chữ */
+        .underline {
+            border-bottom: 2px solid #000;
+            width: 50mm;
+        }
+
+        /* Gạch chân chữ */
+        .underline-small {
+            border-bottom: 0.5px solid #000;
+            width: 50mm;
+        }
+
+        /* Đường kẻ dưới, áp dụng thêm style="width=xx%" tùy chỗ */
+        hr {
+            border: none;
+            height: 0.5px;
+            color: black;
+            background-color: black;
+        }
+
+        table td,
+        table th {
+            border: solid 1.5px black !important;
+            padding: 0px;
+            vertical-align: middle !important;
+        }
+
+
+        /* Bảng không có viền */
+        .table-no-border td,
+        .table-no-border th {
+            border: none !important;
+            vertical-align: middle !important;
+        }
+
+        .thu-dong {
+            text-indent: 15mm;
+        }
+
+        .mce-item-table,
+        .mce-item-table td,
+        .mce-item-table th,
+        .mce-item-table caption {
+            border: none;
+            font-family: "Times New Roman";
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            vertical-align: middle !important;
+        }
+
+
+
+        .container {
+            padding: 0 !important;
+        }
+
+        /* xuất file */
+        .table-export td {
+            border: none !important;
+        }
+
+        .table-export th {
+            border: none !important;
+        }
+
+        .table-export-index-bullet {
+            width: 25px !important;
+        }
+
+        .table-export-index-heading {
+            width: 55px !important;
+        }
+    </style>
+</head>
+
+
+
+<body class="spark-ui" style="width: calc(100% - 25px);">
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container" id="allvoice">
+            <table class="table-no-border" style="width: 107%;">
+                <tr>
+                    <td class="txcenter" style="width: 40%;">
+                        <p class="tx12 bold">NGÂN HÀNG TMCP</p>
+                        <p class="tx12 bold">
+                            ĐẠI CHÚNG VIỆT NAM - <span id="branch_key">……….</span>
+                        </p>
+                    </td>
+                    <td class="txcenter" style="width: 60%;">
+                        <p class="tx12 bold">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                        <p class="tx12 bold">Độc lập - Tự do - Hạnh phúc
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="txcenter">
+                  
+                            <p class="txcenter" >__________________</p>
+                     
+                    </td>
+                    <td class="txcenter">
+                        
+                            <p class="txcenter" >__________________</p>
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <td class="txcenter">
+                        <span>Số: <span id="notificationNumber_key">...........</span>/TB-PVB <span
+                                id="notificationSymbol_key">......</span></span>
+                    </td>
+                    <td class="txcenter italic">
+                        <span>Hà Nội, ngày <span id="notificationDay_key">.....</span> tháng <span
+                                id="notificationMonth_key">.....</span> năm <span id="notificationYear_key">.....</span>
+                        </span>
+                    </td>
+                </tr>
+            </table>
+
+
+            <div style="padding-top: 50px; padding-bottom: 30px;">
+                <p class="txcenter tx14bold">
+                    <span>THÔNG BÁO</span>
+                </p>
+                <p class="txcenter tx12bold">
+                    <span>V/v: giải chấp tài sản đảm bảo</span>
+                </p>
+                <p  class="txcenter" >__________________</p>
+            </div>
+            <div class="content">
+                <div style="margin-left: 120px;">
+                    <p class="tx12">
+                        <span>Kính gửi: - </span>
+                        <span id="salutation_key">……………………………………………</span>
+                       
+                    </p> <p style="margin-left: 60px;">- ……………………………………………</p>
+                </div>
+
+                <p class="tx12 italic" style="">
+                    <span>- Căn cứ Phiếu yêu cầu đăng ký thế chấp quyền sử dụng đất, tài sản gắn liền với
+                        đất ngày </span>
+                    <span id="registrationRequestDate_key">……………………</span>;
+                </p>
+
+                <p class="tx12 italic">
+                    <span>- Căn cứ Hợp đồng thế chấp </span>
+                    <span id="mortgageContract_key">……………………………</span>
+                    <span> số công chứng: </span>
+                    <span id="notarizationNumber_key">………….</span>
+                    <span>, Quyển số </span>
+                    <span id="notarizationBookNumber_key">…………………..</span>
+                    <span> ngày </span>
+                    <span id="notarizationDate_key">……………….</span>
+                    <span> giữa Ngân hàng TMCP Đại Chúng Việt Nam – Chi nhánh </span>
+                    <span id="bankBranch_key">…………………………..</span>
+                    <span> với </span>
+                    <span id="partner_key">…………………………………….</span>
+                </p>
+
+                <p class="tx12bold">
+                    <span class="underline">BÊN THẾ CHẤP</span><span>:</span>
+                </p>
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12bold" style="width: 50%;">
+                            <span><span>Họ tên: </span><span id="mortgagorName_key">……………………………</span></span>
+                        </td>
+                        <td class="tx12" style="width: 50%;">
+                            <span>Sinh năm: </span><span id="mortgagorBirthYear_key">………………</span>
+                        </td>
+                    </tr>
+                </table>
+                <p class="tx12">
+                    <span>CCCD/CMND/Hộ chiếu số:</span><span id="mortgagorIdNumber_key"> ………………………</span><span>
+                        do</span><span id="mortgagorIdIssuedBy_key"> …………………………….</span><span> cấp ngày</span><span
+                        id="mortgagorIdIssuedDate_key"> ……………….</span>
+                </p>
+
+                <p class="tx12">
+                    <span>Nơi thường trú: </span><span id="mortgagorAddress_key">…………………………………………………………………………</span>
+                </p>
+
+                <p class="tx12 italic">
+                    <span class="underline-small">Cùng vợ/chồng là:</span>
+                </p>
+
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12bold" style="width: 50%;">
+                            <span><span>Họ tên: </span><span id="spouseName_key">……………………………</span></span>
+                        </td>
+                        <td class="tx12" style="width: 50%;">
+                            <span>Sinh năm: </span><span id="spouseBirthYear_key">………………</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <p class="tx12">
+                    <span>CCCD/CMND/Hộ chiếu số:</span><span id="spouseIdNumber_key"> ………………………</span><span>
+                        do</span><span id="spouseIdIssuedBy_key"> …………………………….</span><span> cấp ngày</span><span
+                        id="spouseIdIssuedDate_key"> ……………….</span>
+                </p>
+
+                <p class="tx12">
+                    <span>Nơi thường trú: </span><span id="spouseAddress_key">…………………………………………………………………………</span>
+                </p>
+
+                <p class="tx12 italic"><span>(Sau đây gọi tắt là “<span class="bold">Bên Thế Chấp</span>”)</span></p>
+
+                <p class="tx12bold">
+                    <span class="underline">BÊN NHẬN THẾ CHẤP:
+                    </span>
+                    <span> NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM – CHI NHÁNH
+                        <span id="mortgageeBankBranch_key">……………………………………………………</span>
+                    </span>
+                </p>
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12" style="width: 25%;">
+                            <span>Địa chỉ</span>
+                        </td>
+                        <td class="tx12" style="width: 75%;">
+                            <p><span>: </span><span id="mortgageeAddress_key">……………………………………………………………………….</span></p>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <p>
+                <p class="tx12"><span>Mã số doanh nghiệp</span> :<span id="mortgageeBusinessId_key">…………………</span><span> do
+                        <span id="mortgageeBusinessIdIssuedBy_key">…………………………………….</span> </span><span> cấp, đăng ký lần
+                        đầu ngày</span><span id="mortgageeBusinessRegistrationDay_key">……</span><span>tháng</span><span
+                        id="mortgageeBusinessRegistrationMonth_key">……</span><span>năm</span><span
+                        id="mortgageeBusinessRegistrationYear_key">…………</span><span>, và các lần đăng ký thay đổi,
+                        bổ sung (nếu có).</span></p>
+                </p>
+
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12" style="width: 25%;">
+                            <span><span>Điện thoại </span></span>
+                        </td>
+                        <td>
+                            <span>:</span>
+                            <span id="mortgageePhoneNumber_key">………</span>
+                        </td>
+                        <td class="tx12" style="width: 50%;">
+                            <span><span>Fax: </span><span id="mortgageeFaxNumber_key">……………….</span></span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12" style="width: 25%;">
+                            <span>Đại diện </span>
+                        </td>
+                        <td class="tx12">
+                            <span>:</span>
+                            <span id="mortgageeRepresentative_key">
+                                ………………….</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12" style="width: 25%;">
+                            <span>Chức vụ </span>
+                        </td>
+                        <td class="tx12">
+                            <span>:</span>
+                            <span id="mortgageePosition_key">
+                                ………………….</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table-no-border">
+                    <tr>
+                        <td class="tx12" style="width: 25%;">
+                            <span>Văn bản ủy quyền số </span>
+                        </td>
+                        <td class="tx12">
+                            <span>:</span>
+                            <span class="title4Content"
+                                id="mortgageeAuthorizationDocumentNumber_key">……………………………………………………………………..</span>
+                        </td>
+                    </tr>
+                </table>
+
+
+                <p><span class="tx12bolditalic">(Sau đây gọi là: “Ngân Hàng”)</span></p>
+
+                <p>
+                    <span>Tài Sản Thế Chấp là</span>
+                    <span id="collateralAsset_key"> ……………………………….</span>
+                    <span> thuộc quyền sử dụng, quyền sở hữu hợp pháp của Bên Thế Chấp theo Giấy chứng nhận</span>
+                    <span id="certificateOfOwnership_key"> ……………………………………………</span>
+                    <span> số</span>
+                    <span id="certificateNumber_key"> ……………….</span>
+                    <span>, Số vào sổ/Hồ sơ gốc số:</span>
+                    <span id="recordBookNumber_key"> ……………………</span><span> do</span>
+                    <span id="certificateIssuedBy_key"> ……………………………………</span>
+                    <span>cấp ngày</span>
+                    <span id="certificateIssuedDate_key">………………..</span>
+                    <span> cho</span><span id="certificateHolder_key"> …………………………..</span>, <span> cụ
+                        thể như sau:</span> <span id="currentMortgageStatus_key"> ........................</span>
+                </p>
+
+
+                <p class="thu-dong">
+                    <span>Hiện nay, Bên thế chấp đã</span><span id="notificationRecipients_key"> ………………………</span><span>
+                        tại Ngân hàng TMCP Đại Chúng Việt Nam. Bằng văn bản này, Ngân Hàng chúng tôi xin thông báo
+                        với Quý cơ quan và đề nghị Quý cơ quan làm thủ tục giải chấp tài sản đảm bảo và chuyển quyền
+                        thụ hưởng tài sản đảm bảo nêu trên để tạo điều kiện cho Bên thế chấp có thể thực hiện được
+                        các giao dịch sau này.</span>
+                </p>
+
+                <p class="thu-dong tx12bolditalic"><span>Xin trân trọng thông
+                        báo!</span></p>
+
+
+
+                <table class="table-no-border" style="margin-top: 50px;">
+                    <tr>
+                        <td style="width: 50%;" class="tx12">
+                            <span>
+                                <p class="italic bold">Nơi nhận:</p>
+                                <p>- Như trên</p>
+                                <p>- Lưu: VT, PVB <span id="archiveDepartment_key">……….</span></p>
+                            </span>
+                            
+                        </td>
+                        <td class="tx12" style="width: 50%;">
+                            <span class="tx12bold">TUQ. TỔNG GIÁM ĐỐC</span>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

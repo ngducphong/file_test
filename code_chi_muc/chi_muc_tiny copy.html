@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/7.3.0/tinymce.min.js"
+        integrity="sha512-RUZ2d69UiTI+LdjfDCxqJh5HfjmOcouct56utQNVRjr90Ea8uHQa+gCxvxDTC9fFvIGP+t4TDDJWNTRV48tBpQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        /* Your CSS code for indexing levels */
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            counter-reset: section;
+        }
+
+        .section {
+            counter-reset: number;
+        }
+
+        .number {
+            counter-reset: subnumber;
+        }
+
+        .subnumber {
+            counter-reset: subletter;
+        }
+
+        .subletter {
+            counter-reset: roman;
+        }
+
+        .roman {
+            counter-reset: subroman;
+        }
+
+        .section,
+        .number,
+        .subnumber,
+        .subletter,
+        .roman {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+
+        .section::before,
+        .number::before,
+        .subnumber::before,
+        .subletter::before,
+        .roman::before {
+            white-space: nowrap;
+        }
+
+        .section::before {
+            counter-increment: section;
+            content: "Điều " counter(section) ". ";
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .number::before {
+            counter-increment: number;
+            content: counter(section) "." counter(number) ". ";
+            margin-right: 10px;
+        }
+
+        .subnumber::before {
+            counter-increment: subnumber;
+            content: counter(section) "." counter(number) "." counter(subnumber) ". ";
+            margin-right: 10px;
+        }
+
+        .subletter::before {
+            counter-increment: subletter;
+            content: counter(subletter, lower-alpha) ". ";
+            margin-right: 10px;
+        }
+
+        .roman::before {
+            counter-increment: roman;
+            content: counter(roman, lower-roman) ". ";
+            margin-right: 10px;
+        }
+
+        .bullet-level-1::before {
+            content: "-";
+            /* Bullet point character for level 1 */
+        }
+
+        .bullet-level-2::before {
+            content: "•";
+            /* Bullet point character for level 2 */
+        }
+
+        .bullet {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .bullet-level-1 {
+            /* margin-left: 20px; */
+        }
+
+        .bullet-level-2 {
+            margin-left: 20px;
+        }
+
+        .lineheightselect1 {
+            line-height: 1;
+        }
+
+        .lineheightselect1_5 {
+            line-height: 1.5;
+        }
+
+        .lineheightselect2 {
+            line-height: 2;
+        }
+
+        .lineheightselect2_5 {
+            line-height: 2.5;
+        }
+
+        .lineheightselect3 {
+            line-height: 3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Dropdown for actions -->
+    <div class="dropdown" style="z-index: 9999">
+        <button class="dropbtn">Chọn hành động</button>
+        <div class="dropdown-content">
+            <button onclick="addHeading('section')">Thêm Điều</button>
+            <button onclick="addSameLevel()">Thêm mục cùng cấp</button>
+            <button onclick="addSubLevel()">Thêm cấp con</button>
+            <button onclick="increaseLevel()">Tăng cấp chỉ mục</button>
+            <button onclick="addNewLine()">Thêm dòng mới</button>
+            <button onclick="addBulletPoint()">Thêm gạch đầu dòng</button>
+            <button onclick="addBulletPointLV2()">Thêm chấm đầu dòng</button>
+        </div>
+    </div>
+
+    <!-- Text editor area -->
+    <textarea id="myEditor">
+        <div class="container" id="allvoice" ></div>
+    </textarea>
+
+    <script>
+        tinymce.init({
+            selector: '#myEditor',
+            toolbar: 'styleselect lineheightselect',
+            line_height_formats: "1 1.5 2 2.5 3", // Các giá trị line-height tiêu chuẩn
+            content_style: ` 
+             body {
+            font-family: 'Times New Roman', Times, serif;
+            counter-reset: section;
+        }
+
+        .section {
+            counter-reset: number;
+        }
+
+        .number {
+            counter-reset: subnumber;
+        }
+
+        .subnumber {
+            counter-reset: subletter;
+        }
+
+        .subletter {
+            counter-reset: roman;
+        }
+
+        .roman {
+            counter-reset: subroman;
+        }
+
+        .section,
+        .number,
+        .subnumber,
+        .subletter,
+        .roman {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+
+        .section::before,
+        .number::before,
+        .subnumber::before,
+        .subletter::before,
+        .roman::before {
+            white-space: nowrap;
+        }
+
+        .section::before {
+            counter-increment: section;
+            content: "Điều " counter(section) ". ";
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .number::before {
+            counter-increment: number;
+            content: counter(section) "." counter(number) ". ";
+            margin-right: 10px;
+        }
+
+        .subnumber::before {
+            counter-increment: subnumber;
+            content: counter(section) "." counter(number) "." counter(subnumber) ". ";
+            margin-right: 10px;
+        }
+
+        .subletter::before {
+            counter-increment: subletter;
+            content: counter(subletter, lower-alpha) ". ";
+            margin-right: 10px;
+        }
+
+        .roman::before {
+            counter-increment: roman;
+            content: counter(roman, lower-roman) ". ";
+            margin-right: 10px;
+        }
+
+        .bullet-level-1::before {
+            content: "-";
+            /* Bullet point character for level 1 */
+        }
+
+        .bullet-level-2::before {
+            content: "•";
+            /* Bullet point character for level 2 */
+        }
+
+        .bullet {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .bullet-level-1 {
+            /* margin-left: 20px; */
+        }
+
+        .bullet-level-2 {
+            margin-left: 20px;
+        }
+
+        .lineheightselect1 {
+            line-height: 1;
+        }
+
+        .lineheightselect1_5 {
+            line-height: 1.5;
+        }
+
+        .lineheightselect2 {
+            line-height: 2;
+        }
+
+        .lineheightselect2_5 {
+            line-height: 2.5;
+        }
+
+        .lineheightselect3 {
+            line-height: 3;
+        }
+        `,
+            setup: function (editor) {
+                function getSelectedNodes2(editor) {
+                    const selectedNodes = [];
+                    const selection = editor.selection;
+                    const range = selection.getRng(); // Lấy range của phần đã chọn
+
+                    // tìm đến thẻ cha nếu không thấy (đến thẻ div) thì sử lý, còn thấy thì bỏ qua
+
+                    // Kiểm tra nếu có phần được chọn (không phải chỉ là con trỏ nhấp nháy)
+                    if (!range.collapsed) {
+                        let startNode = range.startContainer;
+                        let endNode = range.endContainer;
+
+                        // Điều chỉnh để lấy các element bao quanh nếu startNode hoặc endNode là text node
+                        if (startNode.nodeType === 3) { // Nếu là text node
+                            startNode = startNode.parentNode;
+                        }
+                        if (endNode.nodeType === 3) { // Nếu là text node
+                            endNode = endNode.parentNode;
+                        }
+
+                        // Lấy node bao quanh chung của phạm vi được chọn
+                        const commonAncestor = range.commonAncestorContainer;
+
+                        // Sử dụng TreeWalker để duyệt qua tất cả các node con bên trong commonAncestor
+                        const walker = document.createTreeWalker(
+                            commonAncestor, // Duyệt từ container chung
+                            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, // Duyệt qua cả element và text node
+                            {
+                                acceptNode: function (node) {
+                                    // Chỉ chấp nhận các node nằm trong khoảng range đã chọn
+                                    return (range.intersectsNode(node)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                                }
+                            }
+                        );
+
+                        let currentNode = walker.currentNode;
+
+                        // Duyệt qua tất cả các node con được chọn và thêm vào mảng selectedNodes
+                        while (currentNode) {
+                            selectedNodes.push(currentNode);
+                            currentNode = walker.nextNode(); // Di chuyển đến node tiếp theo
+                        }
+                    } else {
+                        // Nếu không có phần được chọn, chỉ lấy node hiện tại
+                        const currentNode = selection.getNode();
+                        selectedNodes.push(currentNode);
+                    }
+
+                    // Lọc chỉ lấy các node con cuối cùng (không lấy node cha)
+                    const leafNodes = selectedNodes.filter(node => !node.hasChildNodes());
+
+                    return leafNodes; // Trả về danh sách các node con cuối cùng
+                }
+
+                function getSelectedNodes(editor) {
+                    const selectedNodes = [];
+                    const selection = editor.selection;
+                    const range = selection.getRng(); // Lấy range của phần đã chọn
+
+                    // Kiểm tra nếu có phần được chọn (không phải chỉ là con trỏ nhấp nháy)
+                    if (!range.collapsed) {
+                        let startNode = range.startContainer;
+                        let endNode = range.endContainer;
+
+                        // Điều chỉnh để lấy các element bao quanh nếu startNode hoặc endNode là text node
+                        if (startNode.nodeType === 3) { // Nếu là text node
+                            startNode = startNode.parentNode;
+                        }
+                        if (endNode.nodeType === 3) { // Nếu là text node
+                            endNode = endNode.parentNode;
+                        }
+
+                        // Sử dụng TreeWalker để duyệt qua tất cả các node giữa startNode và endNode
+                        const walker = document.createTreeWalker(
+                            range.commonAncestorContainer, // Bắt đầu duyệt từ container cha chung của cả start và end node
+                            NodeFilter.SHOW_ELEMENT | NodeFilter.SHOW_TEXT, // Lấy cả element và text node
+                            {
+                                acceptNode: function (node) {
+                                    // Chỉ chấp nhận các node nằm trong khoảng range đã chọn
+                                    return (range.intersectsNode(node)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+                                }
+                            }
+                        );
+
+                        let currentNode = walker.currentNode;
+
+                        // Duyệt qua tất cả các node được chọn và thêm vào mảng selectedNodes
+                        while (currentNode) {
+                            selectedNodes.push(currentNode);
+                            currentNode = walker.nextNode(); // Di chuyển đến node tiếp theo
+                        }
+                    } else {
+                        // Nếu không có phần được chọn, chỉ lấy node hiện tại
+                        const currentNode = selection.getNode();
+                        selectedNodes.push(currentNode);
+                    }
+
+                    return selectedNodes;
+                }
+
+
+                function handleLineHeight(value) {
+                    // const selectedNodes = getSelectedNodes(editor); // Lấy tất cả các node được chọn
+                    // console.log("Selected nodes:", selectedNodes); // Kiểm tra các phần tử được chọn
+
+                    const selectedNodes2 = getSelectedNodes2(editor); // Lấy tất cả các node được chọn
+                    console.log("Selected nodes 2:", selectedNodes2); // Kiểm tra các phần tử được chọn
+
+                    debugger;
+                    selectedNodes2.forEach(function (selectedN) {
+                        debugger;
+                        const selectedNodeBase = selectedN;
+                        const selectedNode = selectedN.parentNode;
+                        const parentNode = selectedNode.parentNode;
+                        console.log("Parent node:", parentNode);  // Kiểm tra node cha được lấy
+
+                        // Kiểm tra xem selectedNode có class "contentIndex" hay không
+                        if (selectedNode && editor.dom.hasClass(selectedNode, 'contentIndex')) {
+                            if (parentNode) {
+                                // Cập nhật line-height dựa trên giá trị được chọn
+                                if (`${value}` === '1') {
+                                    editor.dom.addClass(parentNode, 'lineheightselect1');
+                                    editor.dom.removeClass(parentNode, 'lineheightselect1_5 lineheightselect2 lineheightselect2_5 lineheightselect3');
+                                } else if (`${value}` === '1.5') {
+                                    editor.dom.addClass(parentNode, 'lineheightselect1_5');
+                                    editor.dom.removeClass(parentNode, 'lineheightselect1 lineheightselect2 lineheightselect2_5 lineheightselect3');
+                                } else if (`${value}` === '2') {
+                                    editor.dom.addClass(parentNode, 'lineheightselect2');
+                                    editor.dom.removeClass(parentNode, 'lineheightselect1 lineheightselect1_5 lineheightselect2_5 lineheightselect3');
+                                } else if (`${value}` === '2.5') {
+                                    editor.dom.addClass(parentNode, 'lineheightselect2_5');
+                                    editor.dom.removeClass(parentNode, 'lineheightselect1 lineheightselect1_5 lineheightselect2 lineheightselect3');
+                                } else if (`${value}` === '3') {
+                                    editor.dom.addClass(parentNode, 'lineheightselect3');
+                                    editor.dom.removeClass(parentNode, 'lineheightselect1 lineheightselect1_5 lineheightselect2 lineheightselect2_5');
+                                }
+                                editor.dom.addClass(parentNode, 'parent-class-added'); // Thêm class vào thẻ cha
+                                console.log('Đã thêm class cho thẻ cha vì thẻ con có class "contentIndex"');
+                            } else {
+                                console.log('Không tìm thấy thẻ cha');
+                            }
+                        } else {
+
+                            // nếu cha không có thì lặp đến khi có cha class contentIndex cho đến thẻ có ID là allvoice
+                            var parentNodeLoop = selectedNode;
+                            while (parentNodeLoop) {
+                                if (editor.dom.hasClass(parentNodeLoop, 'contentIndex')) {
+                                    // kiểm tra 
+                                    const prNodeLoop = parentNodeLoop.parentNode;
+                                    if (prNodeLoop) {
+                                        // Cập nhật line-height dựa trên giá trị được chọn
+                                        if (`${value}` === '1') {
+                                            editor.dom.addClass(prNodeLoop, 'lineheightselect1');
+                                            editor.dom.removeClass(prNodeLoop, 'lineheightselect1_5 lineheightselect2 lineheightselect2_5 lineheightselect3');
+                                        } else if (`${value}` === '1.5') {
+                                            editor.dom.addClass(prNodeLoop, 'lineheightselect1_5');
+                                            editor.dom.removeClass(prNodeLoop, 'lineheightselect1 lineheightselect2 lineheightselect2_5 lineheightselect3');
+                                        } else if (`${value}` === '2') {
+                                            editor.dom.addClass(prNodeLoop, 'lineheightselect2');
+                                            editor.dom.removeClass(prNodeLoop, 'lineheightselect1 lineheightselect1_5 lineheightselect2_5 lineheightselect3');
+                                        } else if (`${value}` === '2.5') {
+                                            editor.dom.addClass(prNodeLoop, 'lineheightselect2_5');
+                                            editor.dom.removeClass(prNodeLoop, 'lineheightselect1 lineheightselect1_5 lineheightselect2 lineheightselect3');
+                                        } else if (`${value}` === '3') {
+                                            editor.dom.addClass(prNodeLoop, 'lineheightselect3');
+                                            editor.dom.removeClass(prNodeLoop, 'lineheightselect1 lineheightselect1_5 lineheightselect2 lineheightselect2_5');
+                                        }
+                                        editor.dom.addClass(prNodeLoop, 'parent-class-added'); // Thêm class vào thẻ cha
+                                        console.log('Đã thêm class cho thẻ cha vì thẻ con có class "contentIndex"');
+                                    } else {
+                                        console.log('Không tìm thấy thẻ cha');
+                                    }
+
+                                    break;
+                                }
+                                if (parentNodeLoop.id === 'tinymce') {
+                                    console.log("Gặp node cha có id 'allvoice', dừng lặp.");
+
+                                    console.log('Phần tử không có class "contentIndex"');
+                                    editor.formatter.apply('customLineHeight', { value: value }, selectedNodeBase); // Áp dụng line-height cho node hiện tại
+                                    console.log(`Đã đặt line-height là: ${value}`);
+                                    break; // Dừng lặp nếu gặp thẻ có id "allvoice"
+                                }
+
+                                parentNodeLoop = parentNodeLoop.parentNode;
+                            }
+
+                        }
+                    });
+
+                }
+
+
+                // Đăng ký formatter cho custom line height
+                editor.on('init', function () {
+                    editor.formatter.register('customLineHeight', {
+                        block: 'p',
+                        styles: { 'line-height': '%value' }
+                    });
+                });
+
+                // Menu tùy chọn line height
+                editor.ui.registry.addMenuButton('lineheightselect', {
+                    text: 'Line Height',
+                    fetch: function (callback) {
+                        const items = [
+                            { text: '1', value: '1' },
+                            { text: '1.5', value: '1.5' },
+                            { text: '2', value: '2' },
+                            { text: '2.5', value: '2.5' },
+                            { text: '3', value: '3' }
+                        ];
+
+                        const menuItems = items.map(item => {
+                            return {
+                                type: 'menuitem',
+                                text: item.text,
+                                onAction: function () {
+                                    handleLineHeight(item.value); // Gọi hàm handleLineHeight khi chọn giá trị line-height
+                                }
+                            };
+                        });
+
+                        callback(menuItems);
+                    }
+                });
+
+                // Các nút tùy chỉnh khác trong editor
+                editor.ui.registry.addButton('addHeadingButton', {
+                    text: 'Thêm Điều',
+                    onAction: function () {
+                        addHeading('section');
+                    }
+                });
+
+                // Xử lý sự kiện Enter để chèn dòng mới
+                editor.on('keydown', function (event) {
+                    if (event.keyCode === 13) { // Phím Enter
+                        event.preventDefault();
+
+                        const selection = editor.selection.getRng();
+                        const span = editor.dom.create('span', {}, '<br />&nbsp;');
+
+                        selection.insertNode(span);
+                        editor.selection.setCursorLocation(span, 1);
+                    }
+                });
+            }
+        });
+
+        function addHeading(type) {
+            const editor = tinymce.activeEditor; // Truy cập vào editor đang hoạt động
+
+            // Tạo phần tử 'div' mới với lớp 'heading' và 'contenteditable' trong TinyMCE
+            const newHeading = editor.dom.create('div', {
+                class: `${type} heading`,
+                tabindex: '0'
+            });
+
+            // Tạo thẻ 'div' hoặc 'span' để bọc nội dung bên trong (giống với contentIndex)
+            const wrapper = editor.dom.create('div', {
+                class: 'contentIndex'
+            }, 'Thêm nội dung mới'); // Nội dung mặc định
+
+            // Chèn 'wrapper' vào trong 'newHeading'
+            newHeading.appendChild(wrapper);
+
+            // Lấy phần tử 'allvoice' bên trong nội dung của TinyMCE
+            const allVoiceElement = editor.dom.get('allvoice'); // Lấy phần tử có id 'allvoice'
+
+            if (allVoiceElement) {
+                // Chèn 'newHeading' vào trong 'allvoice'
+                allVoiceElement.appendChild(newHeading);
+
+                // Đặt con trỏ vào phần tử mới thêm để có thể chỉnh sửa ngay
+                editor.selection.select(newHeading);
+                editor.selection.collapse(false);
+
+                // Cập nhật nội dung TinyMCE sau khi thêm phần tử
+                editor.setContent(editor.getContent());
+            } else {
+                console.log('Không tìm thấy phần tử có id là "allvoice"');
+            }
+        }
+
+
+
+
+        function addSameLevel() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            let node = range.startContainer;
+
+            while (node && node !== editor.getBody()) { // Sử dụng getBody() để lấy phần tử gốc của trình soạn thảo
+                if (node.nodeType === Node.ELEMENT_NODE && editor.dom.hasClass(node, 'heading')) {
+                    const newHeading = editor.dom.create('div', {
+                        class: node.className,
+                        tabindex: '0'
+                    });
+
+                    // Bọc nội dung trong thẻ <div>
+                    const wrapper = editor.dom.create('div', {
+                        class: 'contentIndex'
+                    }, 'Thêm nội dung mới');
+
+                    newHeading.appendChild(wrapper);
+                    editor.dom.insertAfter(newHeading, node);
+
+                    // Cập nhật vị trí của con trỏ sau khi thêm phần tử mới
+                    const newLineRange = editor.dom.createRng();
+                    newLineRange.setStart(newHeading, 0);
+                    newLineRange.collapse(true);
+                    selection.setRng(newLineRange); // Thiết lập lại range trong TinyMCE
+
+                    editor.focus(); // Đảm bảo con trỏ vẫn nằm trong trình soạn thảo
+
+                    break;
+                }
+                node = node.parentNode;
+            }
+        }
+
+
+
+        function addSubLevel() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            let node = range.startContainer;
+
+            while (node && node !== editor.getBody()) { // Sử dụng getBody() để lấy phần tử gốc của trình soạn thảo
+                if (node.nodeType === Node.ELEMENT_NODE && editor.dom.hasClass(node, 'heading')) {
+                    const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                    let currentLevel = levels.findIndex(level => editor.dom.hasClass(node, level));
+
+                    if (currentLevel < levels.length - 1) {
+                        currentLevel++;
+                    }
+
+                    const newHeading = editor.dom.create('div', {
+                        class: `${levels[currentLevel]} heading`,
+                        tabindex: '0'
+                    });
+
+                    // Bọc nội dung trong thẻ <div> hoặc <span>
+                    const wrapper = editor.dom.create('div', {
+                        class: 'contentIndex'
+                    }, 'Thêm nội dung mới');
+
+                    newHeading.appendChild(wrapper);
+                    editor.dom.insertAfter(newHeading, node);
+
+                    // Cập nhật vị trí của con trỏ sau khi thêm phần tử mới
+                    const newLineRange = editor.dom.createRng();
+                    newLineRange.setStart(newHeading, 0);
+                    newLineRange.collapse(true);
+                    selection.setRng(newLineRange); // Thiết lập lại range trong TinyMCE
+
+                    editor.focus(); // Đảm bảo con trỏ vẫn nằm trong trình soạn thảo
+
+                    break;
+                }
+                node = node.parentNode;
+            }
+        }
+
+
+        function increaseLevel() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            let node = range.startContainer;
+
+            while (node && node !== editor.getBody()) { // Sử dụng getBody() để lấy phần tử gốc của trình soạn thảo
+                if (node.nodeType === Node.ELEMENT_NODE && (editor.dom.hasClass(node, 'heading') || editor.dom.hasClass(node, 'bullet'))) {
+
+                    adjustHeadingLevel(node, -1); // Gọi hàm điều chỉnh cấp độ cho heading
+
+                    break;
+                }
+                node = node.parentNode;
+            }
+        }
+
+        function adjustHeadingLevel(element, direction) {
+            const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+            let currentLevel = levels.findIndex(level => tinymce.activeEditor.dom.hasClass(element, level));
+
+            if (currentLevel === -1) return;
+
+            const newLevel = Math.max(0, Math.min(levels.length - 1, currentLevel + direction));
+
+            if (newLevel !== currentLevel) {
+                tinymce.activeEditor.dom.removeClass(element, levels[currentLevel]);
+                tinymce.activeEditor.dom.addClass(element, levels[newLevel]);
+
+                const editor = tinymce.activeEditor; // Đảm bảo chỉnh sửa trong nội dung của TinyMCE
+                editor.selection.select(element); // Đặt con trỏ tại vị trí phần tử đã chỉnh sửa
+                editor.nodeChanged(); // Cập nhật thay đổi trong TinyMCE
+            }
+        }
+
+
+
+        function addNewLine() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            // Tạo phần tử mới sử dụng TinyMCE DOM API
+            const newLine = editor.dom.create('p', {
+                class: 'new-line',
+                tabindex: '0'
+            }, 'Dòng mới'); // Nội dung mặc định, có thể thay đổi
+
+            const parentNode = range.startContainer;
+            let referenceNode = parentNode;
+
+            // Duyệt ngược lên cho đến khi tìm thấy phần tử cha của đoạn văn trong editor
+            while (referenceNode && referenceNode.parentNode !== editor.dom.get('allvoice')) {
+                referenceNode = referenceNode.parentNode;
+            }
+
+            if (referenceNode && referenceNode.parentNode === editor.dom.get('allvoice')) {
+                // Chèn phần tử mới sau phần tử hiện tại
+                editor.dom.insertAfter(newLine, referenceNode);
+
+                // Cập nhật vị trí con trỏ sau khi thêm dòng mới
+                const newLineRange = editor.dom.createRng();
+                newLineRange.setStart(newLine, 0);
+                newLineRange.collapse(true);
+                selection.setRng(newLineRange); // Thiết lập lại range trong TinyMCE
+
+                editor.focus(); // Đảm bảo con trỏ vẫn nằm trong trình soạn thảo
+            }
+        }
+
+
+
+
+        function addBulletPoint() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            // Tạo phần tử div sử dụng TinyMCE DOM API
+            const newBullet = editor.dom.create('div', {
+                class: 'bullet bullet-level-1',
+                tabindex: '0'
+            });
+
+            // Tạo phần tử span với nội dung
+            const newParagraph = editor.dom.create('p', {
+                        class: 'contentIndex'
+                    }, 'Dòng mới'); // Nội dung mặc định, có thể thay đổi
+
+            // Thêm thẻ span vào thẻ div
+            newBullet.appendChild(newParagraph);
+
+            let referenceNode = range.startContainer;
+
+            // Duyệt ngược lên cho đến khi tìm thấy phần tử cha của đoạn văn trong editor
+            while (referenceNode && referenceNode.parentNode !== editor.dom.get('allvoice')) {
+                referenceNode = referenceNode.parentNode;
+            }
+
+            if (referenceNode && referenceNode.parentNode === editor.dom.get('allvoice')) {
+                // Thêm phần tử mới sau node hiện tại trong editor
+                editor.dom.insertAfter(newBullet, referenceNode);
+
+                // Cập nhật vị trí con trỏ sau khi thêm dòng mới
+                const newLineRange = editor.dom.createRng();
+                newLineRange.setStart(newBullet, 0);
+                newLineRange.collapse(true);
+                selection.setRng(newLineRange); // Thiết lập lại range trong TinyMCE
+
+                editor.focus(); // Đảm bảo con trỏ vẫn nằm trong trình soạn thảo
+            }
+        }
+
+
+        function addBulletPointLV2() {
+            const editor = tinymce.activeEditor; // Lấy trình soạn thảo hiện tại của TinyMCE
+            const selection = editor.selection; // Lấy đối tượng selection từ TinyMCE
+            const range = selection.getRng(); // Lấy range hiện tại
+
+            // Tạo phần tử div sử dụng TinyMCE DOM API
+            const newBullet = editor.dom.create('div', {
+                class: 'bullet bullet-level-2',
+                tabindex: '0'
+            });
+
+            // Tạo phần tử span với nội dung
+            const newParagraph = editor.dom.create('p', {
+                        class: 'contentIndex'
+                    }, 'Dòng mới'); // Nội dung mặc định, có thể thay đổi
+
+            // Thêm thẻ span vào thẻ div
+            newBullet.appendChild(newParagraph);
+
+            let referenceNode = range.startContainer;
+
+            // Duyệt ngược lên cho đến khi tìm thấy phần tử cha của đoạn văn trong editor
+            while (referenceNode && referenceNode.parentNode !== editor.dom.get('allvoice')) {
+                referenceNode = referenceNode.parentNode;
+            }
+
+            if (referenceNode && referenceNode.parentNode === editor.dom.get('allvoice')) {
+                // Chèn phần tử mới sau node hiện tại trong editor
+                editor.dom.insertAfter(newBullet, referenceNode);
+
+                // Cập nhật vị trí con trỏ sau khi thêm dòng mới
+                const newLineRange = editor.dom.createRng();
+                newLineRange.setStart(newBullet, 0);
+                newLineRange.collapse(true);
+                selection.setRng(newLineRange); // Thiết lập lại range trong TinyMCE
+
+                editor.focus(); // Đảm bảo con trỏ vẫn nằm trong trình soạn thảo
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

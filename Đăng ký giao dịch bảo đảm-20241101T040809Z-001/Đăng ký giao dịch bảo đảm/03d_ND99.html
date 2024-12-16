@@ -1,0 +1,431 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="doc_management_style.css" />
+</head>
+
+<body>
+    <div class="dropdown" style="z-index: 9999">
+        <button class="dropbtn">Chọn hành động</button>
+        <div class="dropdown-content">
+            <button onclick="addHeading('section')">Thêm Điều</button>
+            <button onclick="addSameLevel()">Thêm mục cùng cấp</button>
+            <button onclick="addSubLevel()">Thêm cấp con</button>
+            <button onclick="addBulletPoint()">Thêm gạch đầu dòng</button>
+            <button onclick="addNewLine()">Thêm dòng mới</button>
+            <button onclick="toggleCounter()">Bật/Tắt đánh số tại mục</button>
+            <button onclick="increaseLevel()">Tăng cấp chỉ mục</button>
+            <button onclick="decreaseLevel()">Giảm cấp chỉ mục</button>
+        </div>
+    </div>
+
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container" id="allvoice">
+            <p style="text-align: right">
+                <b>Mẫu số 03d</b>
+            </p>
+            <p class="tx14 bold txcenter">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+            <p class="tx14 bold txcenter">Độc lập - Tự do - Hạnh phúc
+                <hr style="width: 30%" />
+            </p>
+            <p class="tx14 txcenter"><i>........, ngày........ tháng........ năm.........</i></p>
+            <p>&nbsp;</p>
+            <table>
+                <tr>
+                    <td rowspan="2" style="border: none">
+                        <p class="tx12 bold txcenter">
+                            PHIẾU YÊU CẦU XÓA ĐĂNG KÝ
+                            BIỆN PHÁP BẢO ĐẢM BẰNG ĐỘNG SẢN, CÂY HẰNG NĂM, CÔNG TRÌNH TẠM
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p class="tx13">
+                            Kính gửi : Trung tâm đăng ký giao dịch, tài sản tại <span class="html_key"
+                                id="sendTo_key">[...]</span>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="tx12 bold txcenter">PHẦN GHI CỦA CƠ QUAN ĐĂNG KÝ</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tx13">
+                        <p class="bold">Số tiếp nhận:</p>
+                        <p>Thời điểm tiếp nhận:
+                            <i><span class="html_key" id="recvHour_key">[...]</span> giờ
+                                <span class="html_key" id="recvMinute_key">[...]</span> phút
+                                ngày <span class="html_key" id="recvDay_key">[...]</span>
+                                tháng <span class="html_key" id="recvMonth_key">[...]</span>
+                                năm <span class="html_key" id="recvYear_key">[...]</span></i>
+                        </p>
+                        <p class="txcenter bold">Người tiếp nhận</p>
+                        <p class="txcenter italic">(Ký và ghi rõ họ, tên)</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="tx13">
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">1. Thông tin chung</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>
+                            1.1. Người yêu cầu đăng ký
+                        </p>
+                        <table class="table-no-border tx13">
+                            <tr>
+                                <td>&squ; Bên nhận bảo đảm</td>
+                                <td>&squ; Bên bảo đảm</td>
+                                <td>&squ; Người nhận chuyển giao tài sản bảo đảm</td>
+                            </tr>
+                            <tr>
+                                <td>&squ; Cơ quan thi hành án dân sự, Chấp hành viên</td>
+                                <td>&squ; Cơ quan khác có thẩm quyền, người khác có thẩm quyền</td>
+                                <td>&squ; Quản tài viên/Doanh nghiệp quản lý, thanh lý tài sản</td>
+                            </tr>
+                            <tr>
+                                <td>&squ; Chi nhánh của pháp nhân, người đại diện</td>
+                            </tr>
+                        </table>
+                        <p>1.2. Thuộc đối tượng không phải nộp phí đăng ký &squ;</p>
+                        <table class="table-no-border tx13">
+                            <tr>
+                                <td style="width: 35%;">1.3. Nhận kết quả đăng ký:</td>
+                                <td>
+                                    <p>&squ; Trực tiếp tại cơ quan đăng ký</p>
+                                    <p class="txcondensed">&squ; Qua dịch vụ bưu chính <i>(ghi tên và địa chỉ người
+                                            nhận)</i></p>
+                                    <p>.........................................</p>
+                                    <p>&squ; Cách thức điện tử <i>(nếu pháp luật quy định)</i></p>
+                                    <p>.........................................</p>
+                                    <p>&squ; Cách thức khác <i>(nếu được cơ quan đăng ký đồng ý)</i></p>
+                                    <p>.........................................</p>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>
+                            1.4. Mã số tài khoản đăng ký trực tuyến <i>(nếu có)</i>
+                            <span class="html_key" id="accId"></span>
+                        </p>
+                        <p>1.5. Địa chỉ để cơ quan đăng ký liên hệ khi cần thiết:</p>
+                        <p>Họ và tên: <span class="html_key" id="aplierFullName_key">[...]</span></p>
+                        <p>Số điện thoại: <span class="html_key" id="aplierPhone_key">[...]</span>
+                            Thư điện tử <i>(nếu có)</i><span class="html_key" id="aplierEmail_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">2. Biện pháp bảo đảm đã đăng ký:</p>
+                        <p>Số đăng ký: <span class="html_key" id="regNum_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">3. Căn cứ xóa đăng kí:</p>
+                        <p>Số đăng ký: <span class="html_key" id="basisOfDeletion_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">4. Yêu cầu thông báo việc xóa thế chấp đối với phương tiện giao thông &squ;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Yêu cầu thông báo bằng bản giấy</p>
+                    </td>
+                    <td><p>&squ;</p></td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Yêu cầu thông báo bằng bản điện tử</p>
+                    </td>
+                    <td><p>&squ;</p></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>Tên và địa chỉ cơ quan tiếp nhận thông báo:
+                            <span class="html_key" id="recvNameAdress_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tx13">
+                        <p><b>5. Giấy tờ kèm theo :</b></p>
+                        <p><span class="html_key" id="attachedDoc_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" class="tx13 bold">
+                        <p>Người yêu cầu đăng ký chịu trách nhiệm trước pháp luật về
+                            trung thực trong kê khai và về tính chính xác của thông tin được kê khai trong Phiếu yêu
+                            cầu này.</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border">
+                <tr>
+                    <td>
+                        <p class="tx13 txcenter bold">BÊN BẢO ĐẢM</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), </p>
+                        <p class="tx13 txcenter italic">đóng dấu (nếu có)</p>
+                    </td>
+                    <td>
+                        <p class="tx13 txcenter bold">BÊN NHẬN BẢO ĐẢM</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), </p>
+                        <p class="tx13 txcenter italic">đóng dấu (nếu có)</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border">
+                <tr>
+                    <td>
+                        <p class="tx13 txcenter bold">NGƯỜI YÊU CẦU XÓA ĐĂNG KÝ KHÁC</p>
+                        <p class="tx13 txcenter bold">(HOẶC NGƯỜI ĐẠI DIỆN)</p>
+                        <p class="tx13 txcenter italic">Ký, ghi rõ họ và tên, chức danh (nếu có), đóng dấu (nếu có)</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+
+            <p class="tx14 txcenter"><b>HƯỚNG DẪN CHUNG</b></p>
+            <p class="tx14 txindent">1. Nội dung kê khai phải trung thực, đầy đủ, chính xác.</p>
+            <p class="tx14 txindent">2. Đối với phần kê khai có lựa chọn thì đánh dấu (X) vào ô vuông tương ứng được lựa
+                chọn.</p>
+            <p class="tx14 txindent">3. Gạch chéo đối với mục không có thông tin kê khai trên Phiếu yêu cầu đăng ký.</p>
+            <p class="tx14 txindent">4. Thông tin được kê khai, nội dung liên quan trong Phiếu yêu cầu có thể được thể
+                hiện trên nhiều trang. Trường hợp này, các trang phải được đánh số thứ tự và người yêu cầu đăng ký
+                phải ký nháy vào từng trang.
+            </p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function addHeading(type) {
+                const contentDiv = document.getElementById('allvoice');
+                const newHeading = document.createElement('div');
+                newHeading.className = `${type} heading`;
+                newHeading.setAttribute('contenteditable', 'true');
+                newHeading.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newHeading);
+            }
+
+            function addSameLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const newHeading = document.createElement('div');
+                        newHeading.className = node.className;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            function addSubLevel() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('heading')) {
+                        const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                        let currentLevel = levels.findIndex(level => node.classList.contains(level));
+
+                        if (currentLevel < levels.length - 1) {
+                            currentLevel++;
+                        }
+
+                        const newHeading = document.createElement('div');
+                        newHeading.className = `${levels[currentLevel]} heading`;
+                        newHeading.setAttribute('contenteditable', 'true');
+                        newHeading.setAttribute('tabindex', '0');
+                        node.parentNode.insertBefore(newHeading, node.nextSibling);
+
+                        const newLineRange = document.createRange();
+                        newLineRange.setStart(newHeading, 0);
+                        newLineRange.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(newLineRange);
+
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            }
+
+            window.addHeading = addHeading;
+            window.addSameLevel = addSameLevel;
+            window.addSubLevel = addSubLevel;
+
+            window.addBulletPoint = function () {
+                const contentDiv = document.getElementById('allvoice');
+                const newBullet = document.createElement('div');
+                newBullet.className = 'bullet bullet-level-1';
+                newBullet.setAttribute('contenteditable', 'true');
+                newBullet.setAttribute('tabindex', '0');
+                contentDiv.appendChild(newBullet);
+            };
+
+            window.toggleCounter = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        node.classList.toggle('no-counter');
+                        if (node.classList.contains('no-counter')) {
+                            node.style.marginLeft = '0';
+                        } else {
+                            adjustHeadingLevel(node, 0); // Đảm bảo chỉ mục được căn chỉnh lại
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.increaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, 1);
+                        } else {
+                            adjustHeadingLevel(node, 1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.decreaseLevel = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                let node = range.startContainer;
+
+                while (node && node !== document.getElementById('allvoice')) {
+                    if (node.nodeType === Node.ELEMENT_NODE && (node.classList.contains('heading') || node.classList.contains('bullet'))) {
+                        if (node.classList.contains('bullet')) {
+                            adjustBulletLevel(node, -1);
+                        } else {
+                            adjustHeadingLevel(node, -1);
+                        }
+                        break;
+                    }
+                    node = node.parentNode;
+                }
+            };
+
+            window.addNewLine = function () {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+
+                const range = selection.getRangeAt(0);
+                const newLine = document.createElement('p');
+                newLine.className = 'new-line';
+                newLine.setAttribute('contenteditable', 'true');
+                newLine.setAttribute('tabindex', '0');
+                newLine.textContent = 'Dòng mới'; // Nội dung mặc định, có thể thay đổi
+
+                const parentNode = range.startContainer;
+                let referenceNode = parentNode;
+
+                while (referenceNode && referenceNode.parentNode !== document.getElementById('allvoice')) {
+                    referenceNode = referenceNode.parentNode;
+                }
+
+                if (referenceNode && referenceNode.parentNode === document.getElementById('allvoice')) {
+                    referenceNode.parentNode.insertBefore(newLine, referenceNode.nextSibling);
+
+                    const newLineRange = document.createRange();
+                    newLineRange.setStart(newLine, 0);
+                    newLineRange.collapse(true);
+                    selection.removeAllRanges();
+                    selection.addRange(newLineRange);
+                }
+            };
+
+            function adjustBulletLevel(element, direction) {
+                const currentLevel = element.classList.contains('bullet-level-2') ? 2 : 1;
+                const newLevel = Math.max(1, Math.min(2, currentLevel + direction));
+                element.classList.remove(`bullet-level-${currentLevel}`);
+                element.classList.add(`bullet-level-${newLevel}`);
+            }
+
+            function adjustHeadingLevel(element, direction) {
+                const levels = ['section', 'number', 'subnumber', 'subletter', 'roman'];
+                let currentLevel = levels.findIndex(level => element.classList.contains(level));
+
+                if (currentLevel === -1) return;
+
+                const newLevel = Math.max(0, Math.min(levels.length - 1, currentLevel + direction));
+
+                if (newLevel !== currentLevel) {
+                    element.classList.remove(levels[currentLevel]);
+                    element.classList.add(levels[newLevel]);
+                }
+            }
+        });
+        document.getElementById('editor').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                addNewLine();
+            }
+        });
+
+        window.addHeading = addHeading;
+        window.addBulletPoint = function () {
+            const contentDiv = document.getElementById('allvoice');
+            const newBullet = document.createElement('div');
+            newBullet.className = 'bullet bullet-level-1';
+            newBullet.setAttribute('contenteditable', 'true');
+            newBullet.setAttribute('tabindex', '0');
+            contentDiv.appendChild(newBullet);
+        };
+
+    </script>
+</body>

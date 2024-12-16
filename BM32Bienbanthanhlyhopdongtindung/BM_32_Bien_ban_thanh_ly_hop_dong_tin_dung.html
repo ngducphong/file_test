@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BM_32_Bien_ban_thanh_ly_hop_dong_tin_dung</title>
+    <style>
+        /* Dùng để bỏ margin tự động khi xuất PDF */
+        @page {
+            margin-top: 0;
+            margin-left: 0;
+            margin-right: 0;
+            /* Có thể thêm cả số trang khi xuất PDF */
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+
+        a:hover,
+        a:active,
+        a:focus {
+            color: #888;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: "Times New Roman";
+            color: #000;
+            font-weight: normal;
+            background: #f0f0f0;
+            width: 100%;
+            line-height: 30px;
+            text-align: justify;
+            margin: 0 auto;
+        }
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        span {
+            font-family: "Times New Roman";
+            margin: 0;
+        }
+
+        /* Kích cỡ khổ A4 */
+        .container {
+            width: 210mm;
+            height: auto;
+            padding: 25mm 18mm 30mm 22mm;
+            background: #FFF;
+            margin: 0 auto;
+            box-sizing: border-box;
+            position: relative;
+            font-size: 16px;
+        }
+
+        /* In đậm */
+        .bold {
+            font-weight: bold;
+        }
+
+        /* In nghiêng */
+        .italic {
+            font-style: italic;
+        }
+
+        .tx9 {
+            font-size: 9px;
+            font-weight: normal;
+        }
+
+        .tx12 {
+            font-size: 16px;
+        }
+
+        /* font-size 12 in đậm */
+        .tx12bold {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* font-size 12 in đậm */
+        .tx12bolditalic {
+            font-size: 16px;
+            font-weight: bold;
+            font-style: italic;
+        }
+
+        .tx13 {
+            font-size: 17px;
+        }
+
+        /* font-size 13 in nghiêng */
+        .tx13italic {
+            font-size: 17px;
+            font-weight: normal;
+            font-style: italic;
+        }
+
+        /* font-size 13 in đậm */
+        .tx13bold {
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        /* font-size 14 */
+        .tx14 {
+            font-size: 18.6px;
+        }
+
+        /* font-size 14 in đậm */
+        .tx14bold {
+            font-size: 18.6px;
+            font-weight: bold;
+        }
+
+        /* Căn giữa */
+        .txcenter {
+            text-align: center;
+        }
+
+        /* Căn phải */
+        .txright {
+            text-align: right;
+        }
+
+        /* Căn trái */
+        .txleft {
+            text-align: left;
+        }
+
+        /* Thụt đầu dòng đoạn văn */
+        .txindent {
+            text-indent: 10mm;
+        }
+
+        /* Gạch chân chữ */
+        .underline {
+            border-bottom: 2px solid #000;
+            width: 50mm;
+        }
+
+        /* Gạch chân chữ */
+        .underline-small {
+            border-bottom: 0.5px solid #000;
+            width: 50mm;
+        }
+
+        /* Đường kẻ dưới, áp dụng thêm style="width=xx%" tùy chỗ */
+        hr {
+            border: none;
+            height: 0.5px;
+            color: black;
+            background-color: black;
+        }
+
+        /* Bảng, đã được căn các cột đều nhau */
+        table {
+            width: 100%;
+            text-indent: 0;
+            table-layout: fixed;
+            border-collapse: collapse;
+        }
+
+        table td,
+        table th {
+            border: solid 1.5px black;
+            padding: 0px;
+            vertical-align: top;
+        }
+
+
+        /* Bảng không có viền */
+        .table-no-border td,
+        .table-no-border th {
+            border: none !important;
+        }
+
+        .thu-dong {
+            text-indent: 15mm;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <p class="tx13 txcenter">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+        <p class="tx13 bold txcenter">
+            Độc lập - Tự do - Hạnh phúc
+            <hr style="width: 20%;" />
+        </p>
+        <br>
+
+        <p class="tx13 txcenter bold"><span>BIÊN BẢN THANH LÝ HỢP ĐỒNG</span></p>
+        <p class="tx13 txcenter"><span>Số:</span><span id="liquidationRecordNumber_key">………….</span>/20<span
+                id="recordYear_key">..</span>/BB – PVB</p>
+        <div style="text-align: center;"><span><br></span></div>
+
+        <div class="content">
+
+            <p class="tx13 italic thu-dong">
+                <span class='tx13'>- Căn cứ Hợp đồng tín dụng số <span id="creditContractNumber_key">……………………..</span>
+                    ngày <span id="creditContractDay_key">…….</span>/<span
+                        id="creditContractMonth_key">....</span>/<span id="creditContractYear_key">….</span> giữa Khách
+                    hàng <span id="customerName_key">…………………</span> và Ngân hàng TMCP Đại Chúng Việt Nam </span>
+            </p>
+            <p class='tx13 thu-dong'>
+                <span class='tx13'>Hôm nay <span id="recordDay_key"> </span>, ngày <span id="recordMonth_key">
+                    </span>, tháng <span id="recordYear_key"> </span>, năm , tại Ngân hàng TMCP Đại chúng Việt Nam – Chi
+                    nhánh <span id="bankBranch_keys">…………..</span> chúng tôi gồm có</span>
+            </p>
+            <p class="tx13 bold"><span>I. BÊN CHO VAY: NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM – CHI NHÁNH
+                </span><span id="lenderBankBranch_key">…………. </span></p>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 15%;">
+                        <span>Địa chỉ</span>
+                    </td>
+                    <td class="tx13" style="width: 85%;">
+                        <p><span>: </span><span id='lenderAddress_key'>……………………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+
+            <p class="tx13"><span>Giấy chứng nhận đăng ký kinh doanh số:<span id="businessRegistrationNumber_key">
+                        ………………. </span> do Phòng đăng ký kinh doanh số <span
+                        id="registrationOfficeNumber_key">………</span>- Sở Kế hoạch và Đầu tư Thành phố Hà Nội, đăng
+                    ký lần đầu ngày <span id="firstRegistrationDay_key">….</span> tháng <span
+                        id="firstRegistrationMonth_key">…..</span> năm <span
+                        id="firstRegistrationYear_key">…….</span></span>
+            </p>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 15%;">
+                        <span><span>Điện thoại </span></span>
+                    </td>
+                    <td>
+                        <span>:</span>
+                        <span id="lenderPhoneNumber_key">………….</span>
+                    </td>
+                    <td class="tx13" style="width: 60%;">
+                        <span><span>Fax: </span><span id="lenderFaxNumber_key">……………</span></span>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 15%;">
+                        <span>Đại diện</span>
+                    </td>
+                    <td class="tx13" style="width: 85%;">
+                        <p><span>: </span><span id='representativeName_key'>Ông/Bà</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 15%;">
+                        <span>Chức vụ</span>
+                    </td>
+                    <td class="tx13" style="width: 85%;">
+                        <p><span>: </span><span id='representativePosition_key'>…………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="tx13 italic" style="margin-left: 50px;"><span>(Theo giấy ủy quyền số……)</span></p>
+            <p class="tx13bold italic" style="margin-left: 35px;"><span>(Sau đây gọi là : “PVcomBank”)</span></p>
+
+            <p class="tx13bold">
+                <span>II. BÊN VAY </span>
+            </p>
+            <p class="tx13">
+                <span class="tx13bold underline">Ông/bà</span>
+                <span>:</span><span id='borrowerName_key'>………………………………………</span>
+            </p>
+
+            <p class='tx13'>
+                <span>CMND/ HC/CCCD số</span> <span>: <span id="borrowerIdNumber_key">……………..</span> do Công an <span
+                        id="borrowerIdIssuedBy_key">……….</span> cấp ngày <span
+                        id="borrowerIdIssuedDay_key">…..</span>/<span id="borrowerIdIssuedMonth_key">….</span>/<span
+                        id="borrowerIdIssuedYear_key">….</span></span>
+            </p>
+
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Hộ khẩu TT</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='borrowerPermanentAddress_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Nơi ở hiện nay</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='borrowerCurrentAddress_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Điện thoại</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='borrowerPhoneNumber_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span class="bold">Và chồng/vợ là</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='spouseName_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+            <p class='tx13'>
+                <span>CMND/ HC/CCCD số</span> <span>: <span id="spouseIdNumber_key">……………..</span> do Công an <span
+                        id="spouseIdIssuedBy_key">……….</span> cấp ngày <span id="spouseIdIssuedDay_key">…..</span>/<span
+                        id="spouseIdIssuedMonth_key">….</span>/<span id="spouseIdIssuedYear_key">….</span></span>
+            </p>
+
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Hộ khẩu TT</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='spousePermanentAddress_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Nơi ở hiện nay</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='spouseCurrentAddress_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13" style="width: 20%;">
+                        <span>Điện thoại</span>
+                    </td>
+                    <td class="tx13" style="width: 80%;">
+                        <p><span>: </span><span id='spousePhoneNumber_key'>……………………………..</span></p>
+                    </td>
+                </tr>
+            </table>
+
+            <p class="tx13bold italic">
+                <span>(Sau đây gọi là : “Bên Vay”)</span>
+            </p>
+
+            <p class='tx13 thu-dong'>
+                <span>Hai bên đồng ý ký kết Biên bản thanh lý các Hợp đồng đã ký giữa PVcomBank và Bên Vay với nội dung
+                    sau:</span>
+            </p>
+
+
+            <p class='tx13 thu-dong'>
+                <span><strong>1. </strong> Bên vay đã hoàn trả đầy đủ nợ gốc, lãi và các chi phí liên quan đến các khoản
+                    vay theo Hợp đồng tín dụng số <span id="creditContract_key">…………….</span> ký ngày <span
+                        id="creditContractSignedDay_key">….</span>/<span
+                        id="creditContractSignedMonth_key">….</span>/<span id="creditContractSignedYear_key">….</span>
+                    cho PVcomBank.</span>
+            </p>
+            <p class='tx13 thu-dong'>
+                <span><strong>2. </strong> PvcomBank đã đã giải toả và giao cho Bên vay (và bên bảo lãnh) các hồ sơ và
+                    tài sản như sau:<span id="releaseDocuments_key">…</span></span>
+            </p>
+            <p class='tx13 thu-dong'>
+                <span><strong>3. </strong> Hai bên thống nhất thanh lý Hợp đồng tín dụng số <span
+                        id="securityContractNumber_key">………………..</span> ký ngày <span
+                        id="securityContractSignedDay_key">……</span>/<span
+                        id="securityContractSignedMonth_key">…..</span>/<span
+                        id="securityContractSignedYear_key">……</span> giữa PVcomBank và Khách hàng sau <span
+                        id="creditContractLiquidationDaysAfter_key">…. .</span>ngày kể từ ngày ký Biên bản này và thanh
+                    lý Hợp đồng thế chấp/cầm cố/bảo đảm tín dụng số <span id="securityContractNumber_key">…………</span> ký
+                    ngày <span id="securityContractSignedDay_key">…..</span>/<span
+                        id="securityContractSignedMonth_key">…..</span>/<span
+                        id="securityContractSignedYear_key">……</span> giữa PVcomBank và khách hàng sau <span
+                        id="securityContractLiquidationDaysAfter_key">…..</span>ngày kể từ ngày ký Biên bản này.</span>
+            </p>
+
+            <br>
+            <p class='tx13 thu-dong'>
+                <span>Biên bản này có hiệu lực kể từ ngày ký và được lập thành 03 (ba) bản, có giá trị pháp lý ngang
+                    nhau, PVcomBank giữ 02 (hai) bản, Bên Vay giữ 01 (một) bản.</span>
+            </p>
+
+            <br>
+            <table class="table-no-border">
+                <tr>
+                    <td class="tx13 txcenter bold" style="width: 50%;">
+                        <span>
+                            ĐẠI DIỆN NGÂN HÀNG
+                            <br>
+                            TMCP ĐẠI CHÚNG VIỆT NAM
+                        </span>
+                    </td>
+                    <td class="tx13 txcenter bold" style="width: 50%;">
+                        <span>ĐẠI DIỆN BÊN VAY</span>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</body>
+
+</html>

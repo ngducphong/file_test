@@ -1,0 +1,2 @@
+- chỉnh sửa đoạn js để cho ra chỉ mục đúng hơn - logic xuất pdf
+- word chưa nhận 1 vào css

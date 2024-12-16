@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển Đổi Tiêu Đề và Bullet</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            counter-reset: section;
+        }
+
+        .section {
+            counter-reset: number;
+        }
+
+        .number {
+            counter-reset: subnumber;
+        }
+
+        .subnumber {
+            counter-reset: subletter;
+        }
+
+        .subletter {
+            counter-reset: roman;
+        }
+
+        .roman {
+            counter-reset: subroman;
+        }
+
+        .section,
+        .number,
+        .subnumber,
+        .subletter,
+        .roman {
+            display: flex;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+
+        .section::before,
+        .number::before,
+        .subnumber::before,
+        .subletter::before,
+        .roman::before {
+            white-space: nowrap;
+        }
+
+        .section::before {
+            counter-increment: section;
+            content: "Điều " counter(section) ". ";
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .number::before {
+            counter-increment: number;
+            content: counter(section) "." counter(number) ". ";
+            margin-right: 10px;
+        }
+
+        .subnumber::before {
+            counter-increment: subnumber;
+            content: counter(section) "." counter(number) "." counter(subnumber) ". ";
+            margin-right: 10px;
+        }
+
+        .subletter::before {
+            counter-increment: subletter;
+            content: counter(subletter, lower-alpha) ". ";
+            margin-right: 10px;
+        }
+
+        .roman::before {
+            counter-increment: roman;
+            content: counter(roman, lower-roman) ". ";
+            margin-right: 10px;
+        }
+
+        #content {
+            margin-top: 20px;
+        }
+
+        .heading {
+            outline: none;
+            margin-left: 0;
+        }
+
+        .heading::before {
+            width: 8%;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content button {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .no-counter::before {
+            content: none !important;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .bullet-level-1::before {
+            content: "-";
+            /* Bullet point character for level 1 */
+        }
+
+        .bullet-level-2::before {
+            content: "•";
+            /* Bullet point character for level 2 */
+        }
+
+        .bullet {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .bullet-level-1 {
+            /* margin-left: 20px; */
+        }
+
+        .bullet-level-2 {
+            margin-left: 20px;
+        }
+
+        tr {
+            vertical-align: top;
+        }
+
+         /* xuất file */
+        .table-export td,
+        .table-export th {
+            border: none !important;
+        }
+
+        .table-export-index-bullet {
+            width: 18px;
+        }
+
+        .table-export-index-heading {
+            width: 40px;
+        }
+
+        .table-export-index-heading-section{
+            width: 65px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content">
+        <div class="container" id="allvoice">
+            <p style="text-align: center;"><strong>HỢP ĐỒNG HẠN MỨC TÍN DỤNG 1</strong></p>
+            <p style="text-align: center;">Số: <span id="headerValue_numberHD"
+                    style="background-color: rgba(245, 39, 39, 0.54);">03</span></p>
+            <p style="text-align: center;"><span><br></span></p>
+            <p></p>
+            <p>
+                <span>Hôm nay, ngày </span> <span id="headerValue_dateHD"
+                    style="background-color: rgba(245, 39, 39, 0.54);">20</span>
+                <span>tháng</span> <span id="headerValue_monthHD"
+                    style="background-color: rgba(245, 39, 39, 0.54);">12</span>
+                <span>năm</span> <span id="headerValue_yearHD"
+                    style="background-color: rgba(245, 39, 39, 0.54);">2023</span>
+                <span>, tại</span> <span id="headerValue_atPlace"
+                    style="background-color: rgba(245, 39, 39, 0.54);">1</span>
+                <span>, chúng tôi gồm có:</span>
+            </p>
+            <p><strong><u>BÊN CẤP TÍN DỤNG</u></strong><strong><span>: NGÂN HÀNG TMCP ĐẠI CHÚNG VIỆT NAM -
+                    </span><span id="benAValue_branchName"
+                        style="background-color: rgb(255, 255, 255);">[…]</span></strong></p>
+            <p>
+                Địa
+                chỉ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    id="benAValue_address" style="background-color: rgba(245, 39, 39, 0.54);">Sačê</span>
+            </p>
+            <p>
+                Mã số doanh nghiệp:&nbsp;&nbsp;&nbsp;<span id="benAValue_businessCode"
+                    style="background-color: rgb(255, 255, 255);">[…]</span>
+            </p>
+            <p>
+                Điện
+                thoại:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    id="benAValue_phoneNumber" style="background-color: rgba(245, 39, 39, 0.54);">0</span>
+            </p>
+            <p>
+                Fax:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    id="benAValue_faxNumber" style="background-color: rgba(245, 39, 39, 0.54);">0</span>
+            </p>
+            <p>
+                Đại
+                diện:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    id="benAValue_representativeName" style="background-color: rgb(255, 255, 255);">[…]</span>
+            </p>
+            <p>
+                Chức
+                vụ:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    id="benAValue_position" style="background-color: rgb(255, 255, 255);">[…]</span>
+            </p>
+            <p>
+                <span>Văn bản ủy quyền số : </span><span id="benAValue_authorizationDocumentNumber"
+                    style="background-color: rgb(255, 255, 255);">[…]</span>
+                <span>ngày : </span><span id="benAValue_authorizationDocumentDate"
+                    style="background-color: rgba(245, 39, 39, 0.54);">31/01/2024</span>
+                <span>của : </span><span id="benAValue_branchAuthorizationDocument"
+                    style="background-color: rgb(255, 255, 255);">[…]</span>
+            </p>
+            <p>
+                <span>(Sau đây trong hợp đồng gọi tắt là </span>
+                <span>“Ngân Hàng”</span><span id="benA_key13">)</span>
+            </p>
+            <p><strong><u>BÊN ĐƯỢC CẤP TÍN DỤNG</u></strong><strong><span>: Công ty </span><span
+                        id="benBValue_companyName"
+                        style="background-color: rgba(245, 39, 39, 0.54);">Sačê</span></strong>
+            </p>
+            <p>
+                <span>Mã số doanh nghiệp</span><span> :</span>&nbsp; […]
+            </p>
+            <p>
+                <span>Trụ sở chính</span><span> :</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; […]
+            </p>
+            <p>
+            </p>
+            <p>
+                <span>Điện thoại</span><span> :</span>&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span
+                    style="background-color: rgba(245, 39, 39, 0.54);" id="benBValue_phoneNumber">0</span>
+                &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Fax
+                :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id="benBValue_faxNumber"
+                    style="background-color: rgba(245, 39, 39, 0.54);">0</span>
+            </p>
+            <p></p>
+            <p>
+                <span>Email (nếu có)</span><span> :</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;[…]
+            </p>
+            <p>
+                <span>Đại diện</span><span> :</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp;[…]
+            </p>
+            <p>
+                <span>Chức vụ</span><span> :</span>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp;[…]
+            </p>
+            <p><span>Văn bản ủy quyền số : </span><span id="benBValue_authorizationDocumentNumber"
+                    style="background-color: rgb(255, 255, 255);">[…]</span><span id="benB_key10"> ngày</span> <span
+                    id="benBValue_authorizationDocumentDate"
+                    style="background-color: rgb(255, 255, 255);">[…]</span><span id="benB_key11"> của </span><span
+                    id="benBValue_branchAuthorizationDocument" style="background-color: rgb(255, 255, 255);">[…]</span>
+            </p>
+            <p><span>(Sau đây trong Hợp Đồng gọi tắt là </span><strong>“Bên Được Cấp Tín
+                    Dụng”</strong><span>) Các Bên thống nhất ký kết Hợp đồng Hạn mức tín dụng này (sau đây gọi tắt
+                    là</span><strong>“Hợp Đồng”</strong><span>) với các điều kiện và điều khoản sau:</span></p>
+            <p></p>
+            <div class="section heading" contenteditable="true" tabindex="0"><b>CẤP HẠN MỨC TÍN DỤNG:</b></div>
+            <div class="heading number" contenteditable="true" tabindex="0">Hạn Mức Tín Dụng:Tại bất kỳ thời điểm nào
+                trong Thời Hạn Cấp Hạn Mức, Ngân Hàng đồng ý cấp tín dụng cho Bên Được Cấp Tín Dụng với điều kiện tổng
+                số dư gốc cấp tín dụng tại mọi thời điểm không vượt quá 0 VNĐ (Việt Nam Đồng) hoặc ngoại tệ quy đổi
+                tương đương theo tỷ giá do Ngân Hàng niêm yết tại thời điểm Ngân Hàng thực hiện Cấp Tín Dụng(“Hạn Mức
+                Tín Dụng”). Trong đó:</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Dư nợ cho vay tối đa là:0</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Số tiền cấp bảo lãnh tối đa là:0</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Hạn mức chiết khấu công cụ chuyển nhượng,
+                giấy tờ có giá là:0</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Hạn mức thấu chi tối đa là 0</div>
+            <div class="heading number" contenteditable="true" tabindex="0">Thời Hạn Cấp Hạn Mức:0kể từ ngày […]. Trong
+                thời hạn này, Bên Được Cấp Tín Dụng được đề nghị Ngân Hàng cho vay, bảo lãnh, phát hành L/C, chiết khấu
+                giấy tờ có giá và các nghiệp vụ cấp tín dụng khác (“Cấp Tín Dụng”) phù hợp với các điều khoản quy định
+                tại Hợp Đồng này và các quy định pháp luật có liên quan.</div>
+            <div class="heading number" contenteditable="true" tabindex="0">Mục đích Cấp Tín Dụng:[…]</div>
+            <div class="heading number" contenteditable="true" tabindex="0">Giảm, phục hồi, hủy bỏ Hạn Mức Tín Dụng:
+            </div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Vào ngày Ngân Hàng cấp tín dụng, Hạn Mức
+                Tín Dụng sẽ được giảm đi tương ứng một số tiền bằng tổng số dư nợ gốc của các khoản tín dụng đã được
+                cấp. Khi Bên Được Cấp Tín Dụng đã thực hiện đầy đủ nghĩa vụ thanh toán đối với các khoản tín dụng đã
+                được cấp, Hạn Mức Tín Dụng sẽ được phục hồi tương ứng với số tiền Bên Được Cấp Tín Dụng đã hoàn thành
+                nghĩa vụ thanh toán.</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0">Bất kỳ phần nào của Hạn Mức Tín Dụng chưa
+                được rút vào ngày hết hạn của Thời Hạn Cấp Hạn Mức sẽ bị huỷ bỏ, trừ khi được Ngân Hàng gia hạn bằng văn
+                bản.</div>
+            <div class="heading subnumber no-counter" contenteditable="true" tabindex="0" style="margin-left: 0px;">
+                Trường hợp không sử dụng hết Hạn Mức Tín Dụng trong Thời Hạn Cấp Hạn Mức, Bên Được Cấp Tín Dụng phải trả
+                cho Ngân Hàng một khoản phí(“Phí Cam Kết”)
+            </div>
+            <div class="heading subnumber no-counter" contenteditable="true" tabindex="0" style="margin-left: 0px;">Phí
+                Cam Kết = 0% (x) Số dư Hạn Mức Tín Dụng không được sử dụng hết và bị hủy bỏ.</div>
+            <div class="heading number" contenteditable="true" tabindex="0" style="margin-left: 0px;">Điều kiện Cấp Tín
+                Dụng</div>
+            <div class="heading number no-counter" contenteditable="true" tabindex="0" style="margin-left: 0px;">Ngân
+                Hàng chỉ thực hiện Cấp Tín Dụng và duy trì Hạn Mức Tín Dụng khi Bên Được Cấp Tín Dụng đáp ứng được đầy
+                đủ các điều kiện dưới đây:</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0" style="margin-left: 0px;">Các Bên đã hoàn
+                tất việc ký kết (các) Hợp đồng bảo đảm và hoàn tất việc đăng ký giao dịch bảo đảm theo quy định pháp
+                luật và quy định của Ngân Hàng trong từng thời kỳ;</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0" style="margin-left: 0px;">Ngân Hàng đã
+                nhận được bản gốc hoặc bản sao hợp lệ của tất cả các tài liệu liên quan, chứng minh mục đích cấp tín
+                dụng phù hợp với quy định tại Hợp Đồng;</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0" style="margin-left: 0px;">Không có bất kỳ
+                Sự Kiện Vi Phạm và/hoặc Thay Đổi Bất Lợi Đáng Kể đang diễn ra hoặc đe dọa xảy ra;</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0" style="margin-left: 0px;">Tỷ lệ giữa tổng
+                số dư Cấp Tín Dụng trên tổng giá trị tài sản bảo đảm tại thời điểm dự định Cấp Tín Dụng đáp ứng theo quy
+                định của Ngân Hàng trong từng thời kỳ;</div>
+            <div class="heading subnumber" contenteditable="true" tabindex="0" style="margin-left: 0px;">Tài khoản</div>
+            <div class="heading subnumber no-counter" contenteditable="true" tabindex="0" style="margin-left: 0px;">Chậm
+                nhất vào ngày ký Hợp Đồng, Bên Được Cấp Tín Dụng sẽ mở và duy trì (các) tài khoản tại Ngân Hàng (“Tài
+                Khoản”) và (a) chuyển toàn bộ doanh thu từphương án kinh doanh được Ngân Hàng cấp tín dụng theo Hợp Đồng
+                này vào Tài Khoản; và (b) các hợp đồng thương mại ký với khách hàng liên quan đến phương án kinh doanh
+                được Ngân Hàng cấp tín dụng theo Hợp Đồng này phải quy định rằng mọi khoản thanh toán được khách hàng
+                trả trực tiếp vào Tài Khoản. Trường hợp nếu vì lý do bất khả kháng, khách hàng thanh toán bằng tiền mặt,
+                Bên Được Cấp Tín Dụng có nghĩa vụ gửi ngay khoản tiền này vào Tài Khoản chậm nhất trong thời hạn 01
+                (một) Ngày Làm Việc kể từ ngày thu tiền; (c) không được thay đổi Tài Khoản này trong suốt quá trình thực
+                hiện hợp đồng thương mại ký với khách hàng.</div>
+            <div class="heading subletter" contenteditable="true" tabindex="0" style="margin-left: 0px;">Trước 16h00 của
+                ngày đến hạn thanh toán gốc hoặc ngày thanh toán lãi, Bên Được Cấp Tín Dụng phải duy trì số dư trong Tài
+                Khoản ít nhất bằng số tiền gốc và/hoặc lãi, phí phải thanh toán vào ngày thanh toán gốc hoặc ngày thanh
+                toán lãi đó (Ngày Làm Việc có nghĩa là bất kỳ ngày nào trừ các ngày nghỉ, ngày lễ tại Việt Nam theo quy
+                định của pháp luật và/hoặc bất kỳ ngày nào mà vào ngày đó các tổ chức tín dụng tại Việt Nam được phép
+                hoặc bắt buộc phải đóng cửa theo quy định của cơ quan nhà nước có thẩm quyền).</div>
+            <div class="heading section no-counter" contenteditable="true" tabindex="0" style="margin-left: 0px;"></div>
+        </div>
+    </div>
+    <!-- Nút nhấn để chuyển đổi -->
+    <button id="convertButton">Chuyển Tiêu Đề và Bullet Thành Bảng</button>
+
+    <script>
+        function convertHeadingIndex(html) {
+            // Khởi tạo chỉ số
+            var idxLv1 = 0; // Chương
+            var idxLv2 = 0; // Điều
+            var idxLv3 = 0; // 1.
+            var idxLv4 = 0; // 1.1
+            var idxLv5 = 96; // Unicode a b c d
+
+            // Lưu tất cả các tiêu đề vào mảng
+            var headings = Array.from(html.getElementsByClassName("heading"));
+            for (let i = 0; i < headings.length; i++) {
+                let newContent = '';
+                let newTable = '';
+                
+                // Nội dung
+                let content = headings[i].outerHTML;
+
+                if (headings[i].classList.contains("no-counter")) {
+                    continue;
+                }
+                if (headings[i].classList.contains("section")) {
+                    newContent = `<span style='font-weight: bold; margin-right: 10px;'>Điều ${++idxLv2}.</span>`;
+                    idxLv3 = 0; // Reset số thứ tự khi gặp Điều
+                    idxLv4 = 0; // Reset tiểu mục khi gặp số mới
+                    idxLv5 = 96; // Reset chữ cái khi gặp tiểu mục mới
+
+                     newTable = `
+                        <table class="table-export">
+                            <tr>
+                                <td  class="table-export-index-heading-section"><p>${newContent}</p></td>
+                                <td><p>${content}</p></td>
+                            </tr>
+                        </table>
+                    `;
+
+                } else if (headings[i].classList.contains("number")) {
+                    newContent = `<span style='font-weight: bold; margin-right: 10px;'>${++idxLv3}.</span>`;
+                    idxLv4 = 0; // Reset tiểu mục khi gặp số mới
+                    idxLv5 = 96; // Reset chữ cái khi gặp tiểu mục mới
+
+                     newTable = `
+                        <table class="table-export">
+                            <tr>
+                                <td  class="table-export-index-heading"><p>${newContent}</p></td>
+                                <td><p>${content}</p></td>
+                            </tr>
+                        </table>
+                    `;
+                } else if (headings[i].classList.contains("subnumber")) {
+                    newContent = `<span style='font-weight: bold; margin-right: 10px;'>${idxLv3}.${++idxLv4}.</span>`;
+                    idxLv5 = 96; // Reset chữ cái khi gặp tiểu mục mới
+
+                     newTable = `
+                        <table class="table-export">
+                            <tr>
+                                <td  class="table-export-index-heading"><p>${newContent}</p></td>
+                                <td><p>${content}</p></td>
+                            </tr>
+                        </table>
+                    `;
+                } else if (headings[i].classList.contains("subletter")) {
+                    newContent = `<span style='font-weight: bold; margin-right: 10px;'>${String.fromCharCode(++idxLv5)}.</span>`;
+                
+                     newTable = `
+                        <table class="table-export">
+                            <tr>
+                                <td  class="table-export-index-heading"><p>${newContent}</p></td>
+                                <td><p>${content}</p></td>
+                            </tr>
+                        </table>
+                    `;
+                
+                }     
+                
+                headings[i].outerHTML = newTable;
+            }
+
+            // Lưu tất cả các bullet points vào mảng
+            var bulletPoints = Array.from(html.getElementsByClassName("bullet"));
+            for (let i = 0; i < bulletPoints.length; i++) {
+                let bulletSymbol = '';
+                if (bulletPoints[i].classList.contains("bullet-level-1")) {
+                    bulletSymbol = "-";
+                } else if (bulletPoints[i].classList.contains("bullet-level-2")) {
+                    bulletSymbol = "•";
+                } else if (bulletPoints[i].classList.contains("bullet-level-3")) {
+                    bulletSymbol = "◦";
+                } else if (bulletPoints[i].classList.contains("bullet-level-4")) {
+                    bulletSymbol = "▪";
+                }
+
+                // Thay thế bullet bằng bảng
+                let bulletContent = bulletPoints[i].outerHTML;
+                let newBulletTable = `
+                        <table  class="table-export">
+                            <tr>
+                                <td  class="table-export-index-bullet"><p>${bulletSymbol}</p></td>
+                                <td><p>${bulletContent}</p></td>
+                            </tr>
+                        </table>
+                    `;
+                bulletPoints[i].outerHTML = newBulletTable;
+            }
+        }
+
+        // Gắn sự kiện click vào nút
+        document.getElementById('convertButton').onclick = function () {
+            convertHeadingIndex(document.getElementById('allvoice'));
+        };
+    </script>
+
+
+</body>
+
+</html>

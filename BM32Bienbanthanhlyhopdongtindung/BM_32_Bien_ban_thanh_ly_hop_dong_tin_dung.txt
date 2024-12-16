@@ -1,0 +1,42 @@
+Số biên bản thanh lý: liquidationRecordNumber_key
+Năm của biên bản: recordYear_key
+Số hợp đồng tín dụng: creditContractNumber_key
+Ngày hợp đồng tín dụng: creditContractDay_key
+Tháng hợp đồng tín dụng: creditContractMonth_key
+Năm hợp đồng tín dụng: creditContractYear_key
+Tên khách hàng: customerName_key
+Chi nhánh ngân hàng: bankBranch_key
+Ngày lập biên bản: recordDay_key
+Tháng lập biên bản: recordMonth_key
+Năm lập biên bản: recordYear_key
+Chi nhánh ngân hàng: lenderBankBranch_key
+Địa chỉ: lenderAddress_key
+Số giấy chứng nhận đăng ký kinh doanh: businessRegistrationNumber_key
+Phòng đăng ký kinh doanh: registrationOfficeNumber_key
+Ngày đăng ký kinh doanh lần đầu: firstRegistrationDay_key
+Tháng đăng ký kinh doanh lần đầu: firstRegistrationMonth_key
+Năm đăng ký kinh doanh lần đầu: firstRegistrationYear_key
+Điện thoại: lenderPhoneNumber_key
+Fax: lenderFaxNumber_key
+Đại diện: representativeName_key
+Chức vụ: representativePosition_key
+Số giấy ủy quyền: authorizationDocumentNumber_key
+Tên ông/bà (Bên vay): borrowerName_key
+CMND/HC/CCCD số (Bên vay): borrowerIdNumber_key
+Nơi cấp CMND/HC/CCCD (Bên vay): borrowerIdIssuedBy_key
+Ngày cấp CMND/HC/CCCD (Bên vay): borrowerIdIssuedDay_key
+Tháng cấp CMND/HC/CCCD (Bên vay): borrowerIdIssuedMonth_key
+Năm cấp CMND/HC/CCCD (Bên vay): borrowerIdIssuedYear_key
+Hộ khẩu thường trú (Bên vay): borrowerPermanentAddress_key
+Nơi ở hiện nay (Bên vay): borrowerCurrentAddress_key
+Điện thoại (Bên vay): borrowerPhoneNumber_key
+Tên chồng/vợ (Bên vay): spouseName_key
+CMND/HC/CCCD số (Chồng/vợ bên vay): spouseIdNumber_key
+Nơi cấp CMND/HC/CCCD (Chồng/vợ bên vay): spouseIdIssuedBy_key
+Ngày cấp CMND/HC/CCCD (Chồng/vợ bên vay): spouseIdIssuedDay_key
+Tháng cấp CMND/HC/CCCD (Chồng/vợ bên vay): spouseIdIssuedMonth_key
+Năm cấp CMND/HC/CCCD (Chồng/vợ bên vay): spouseIdIssuedYear_key
+Hộ khẩu thường trú (Chồng/vợ bên vay): spousePermanentAddress_key
+Nơi ở hiện nay (Chồng/vợ bên vay): spouseCurrentAddress_key
+Điện thoại (Chồng/vợ bên vay): spousePhoneNumber_key
+Tài sản giải tỏa: releasedAssets_key

@@ -1,0 +1,710 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="doc_management_style.css" />
+</head>
+<style>
+    /* Dùng để bỏ margin tự động khi xuất PDF */
+    @page {
+        margin-top: 0;
+        margin-left: 0;
+        margin-right: 0;
+        /* Có thể thêm cả số trang khi xuất PDF */
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    a:hover,
+    a:active,
+    a:focus {
+        color: #888;
+        text-decoration: none;
+    }
+
+    body {
+        font-family: "Times New Roman";
+        color: #000;
+        font-weight: normal;
+        background: #f0f0f0;
+        width: 100%;
+        line-height: 30px;
+        text-align: justify;
+        margin: 0 auto;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span {
+        font-family: "Times New Roman";
+        margin: 0;
+    }
+
+    /* Kích cỡ khổ A4 */
+    .container {
+        white-space: normal; /* Cho phép xuống dòng tự động */
+        word-wrap: break-word;
+        width: 210mm;
+        height: auto;
+        padding: 25mm 18mm 350mm 22mm;
+        background: #FFF;
+        margin: 0 auto;
+        box-sizing: border-box;
+        position: relative;
+        font-size: 16px;
+    }
+
+    /* In đậm */
+    .bold {
+        font-weight: bold;
+    }
+
+    /* In nghiêng */
+    .italic {
+        font-style: italic;
+    }
+
+    .tx9 {
+        font-size: 9px;
+        font-weight: normal;
+    }
+
+    .tx12 {
+        font-size: 16px;
+    }
+
+    /* font-size 12 in đậm */
+    .tx12bold {
+        font-size: 16px;
+        font-weight: bold;
+    }
+
+    /* font-size 12 in đậm */
+    .tx12bolditalic {
+        font-size: 16px;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+    .tx13 {
+        font-size: 17px;
+    }
+
+    /* font-size 13 in nghiêng */
+    .tx13italic {
+        font-size: 17px;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    /* font-size 13 in đậm */
+    .tx13bold {
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    /* font-size 14 */
+    .tx14 {
+        font-size: 18.6px;
+    }
+
+    /* font-size 14 in đậm */
+    .tx14bold {
+        font-size: 18.6px;
+        font-weight: bold;
+    }
+
+    /* Căn giữa */
+    .txcenter {
+        text-align: center;
+    }
+
+    /* Căn phải */
+    .txright {
+        text-align: right;
+    }
+
+    /* Căn trái */
+    .txleft {
+        text-align: left;
+    }
+
+    /* Thụt đầu dòng đoạn văn */
+    .txindent {
+        text-indent: 10mm;
+    }
+
+    /* Gạch chân chữ */
+    .underline {
+        border-bottom: 2px solid #000;
+        width: 50mm;
+    }
+
+    /* Gạch chân chữ */
+    .underline-small {
+        border-bottom: 0.5px solid #000;
+        width: 50mm;
+    }
+
+    /* Đường kẻ dưới, áp dụng thêm style="width=xx%" tùy chỗ */
+    hr {
+        border: none;
+        height: 0.5px;
+        color: black;
+        background-color: black;
+    }
+
+    /* Bảng, đã được căn các cột đều nhau */
+    table {
+        width: 100%;
+        text-indent: 0;
+        table-layout: fixed;
+        border-collapse: collapse;
+    }
+
+    table td,
+    table th {
+        border: solid 1.5px black;
+        padding: 0px;
+        vertical-align: top;
+    }
+
+
+    /* Bảng không có viền */
+    .table-no-border td,
+    .table-no-border th {
+        border: none !important;
+    }
+
+    .thu-dong {
+        text-indent: 15mm;
+    }
+
+    /* Bảng, đã được căn các cột đều nhau */
+        /* table {
+            width: 100%;
+            text-indent: 0;
+            table-layout: fixed;
+            border-collapse: collapse;
+            } */
+            
+            table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .container {
+            padding: 0 !important;
+        }
+</style>
+
+<body>
+    <div id="editor" style="width: 100%; height: 700px;" spellcheck='false'>
+        <div class="container" id="allvoice">
+            <p style="text-align: right">
+                <b>Mẫu số 01a</b>
+            </p>
+            <table>
+                <tr>
+                    <td rowspan="2" class="txcenter" style="width: 53%;">
+                        <p class="tx12 bold txcondensed">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                        <p class="tx12 bold">Độc lập - Tự do - Hạnh phúc
+                            <hr style="width: 40%;" />
+                        </p>
+                        <p class="tx12"><span id="location_key">........</span>, ngày <span id="day_key">........</span> tháng <span id="month_key">........</span> năm <span id="year_key">.........</span></p>
+                        <p>&nbsp;</p>
+                        <p class="tx13 bold">PHIẾU YÊU CẦU ĐĂNG KÝ </p>
+                        <p class="tx12 bold">BIỆN PHÁP BẢO ĐẢM BẰNG QUYỀN SỬ DỤNG ĐẤT, TÀI SẢN GẮN LIỀN VỚI ĐẤT</p>
+                        <p class="tx12">(Ban hành kèm theo Nghị định số 99/2022/NĐ-CP ngày 30 tháng 11
+                            năm 2022 của Chính phủ)</p>
+                        <p class="tx12">Kính gửi :<span class="html_key" id="sendTo_key">[...]</span></p>
+                    </td>
+                    <td class="txcenter" style="height: 20px;">
+                        <p class="tx12 bold txcondensed">PHẦN GHI CỦA CƠ QUAN ĐĂNG KÝ</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p class="tx12 bold">Vào Sổ tiếp nhận hồ sơ:</p>
+                        <p class="tx12">Quyển số <span class="html_key" id="appBookId_key">[...]</span> Số thứ tự <span
+                                class="html_key" id="appBookSeq_key">[...]</span></p>
+                        <p class="txright bold">Người tiếp nhận &nbsp;&nbsp;&nbsp;&nbsp;</p>
+                        <p class="txright italic">(Ký và ghi rõ họ, tên)&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="tx14">
+                <tr>
+                    <td colspan="2">
+                        <p class="bold txcenter">
+                            PHẦN KÊ KHAI CỦA NGƯỜI YÊU CẦU ĐĂNG KÝ
+                        </p>
+                    </td>
+                </tr>
+                <tr class="tx14">
+                    <td colspan="2">
+                        <p class="bold">1. Người yêu cầu đăng kí</p>
+                        <p>
+                        <table class="table-no-border tx14">
+                            <tr>
+                                <td>
+                                    <p><span id="securedParty_key">&squ;</span> Bên nhận bảo đảm</p>
+                                </td>
+                                <td>
+                                    <p><span id="guarantor_key">&squ;</span> Bên bảo đảm</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p><span id="assetManager_key">&squ;</span> Quản tài viên /Doanh nghiệp quản lý, thanh lý tài sản</p>
+                                </td>
+                                <td>
+                                    <p><span id="branchRepresentative_key">&squ;</span> Chi nhánh của pháp nhân, người đại diện</p>
+                                </td>
+                            </tr>
+                        </table>
+                        </p>
+                        <p class="txcondensed">Họ và tên đầy đủ đối với cá nhân /tên đầy đủ đối với tổ chức : (viết chữ IN HOA)
+                        </p>
+                        <p><span class="html_key" id="applicantNameCap_key">[...]</span></p>
+                        <p>Địa chỉ để cơ quan đăng ký liên hệ khi cần thiết: <span id="registrationContactAddress_key"></span> </p>
+                        <p>
+                            Họ và tên: <span class="html_key" id="applicantName_key">[...]</span>
+                        </p>
+                        <p>Số điện thoại: <span class="html_key" id="applicantPhone_key">[...]</span>
+                            Fax <i>(nếu có)</i>: <span class="html_key" id="applicantFax_key">[...]</span>
+                            điện tử <i>(nếu có)</i>: <span class="html_key" id="applicantMail_key">[...]</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>
+                            <b>2. Hợp đồng bảo đảm: </b><span class="html_key" id="contractName_key">[...]</span>; số
+                            <i>(nếu có):</i> <span class="html_key" id="contractNum_key">[...]</span>
+                        </p>
+                        <p>
+                            Thời điểm có hiệu lực :
+                            ngày <span class="html_key" id="contractDay_key">[...]</span>
+                            tháng <span class="html_key" id="contractMonth_key">[...]</span>
+                            năm <span class="html_key" id="contractYear_key">[...]</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">3. Bên bảo đảm</p>
+                        <p class="txcondensed">
+                            3.1. Họ và tên đầy đủ đối với cá nhân /tên đầy đủ đối với tổ chức : <i>(viết chữ IN HOA)</i>
+                        </p>
+                        <p><span class="html_key" id="guarantorNameCap_key">[...]</span></p>
+                        <p>3.2. Địa chỉ</p>
+                        <p><span class="html_key" id="guarantorAddress_key">[...]</span></p>
+                        <p>
+                            3.3. Giấy tờ xác định tư cách pháp lý:
+                        </p>
+                        <table class="table-no-border tx14">
+                            <tr>
+                                <td colspan="2">
+                                    <span id="identificationCard_key">&squ;</span> Chứng minh nhân dân/Căn cước công dân/Chứng minh quân đội
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span id="passport_key">&squ;</span> Hộ chiếu</td>
+                                <td><span id="permanentResidenceCard_key">&squ;</span> Thẻ thường trú</td>
+                            </tr>
+                            <tr>
+                                <td><span id="taxCode_key">&squ;</span> Mã số thuế</td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <p>
+                            Số: <span class="html_key" id="guarantorLegalDocId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="guarantorLegalDocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="guarantorLegalDocDay_key">[...]</span>
+                            tháng <span class="html_key" id="guarantorLegalDocMonth_key">[...]</span>
+                            năm <span class="html_key" id="guarantorLegalDocYear_key">[...]</span>
+                        </p>
+                        <p>
+                            3.4. Thuộc đối tượng không phải nộp phí đăng ký <span id="feeExemptStatus_key">&squ;</span>
+                        </p>
+                        <p>
+                            3.5. Số điện thoại <i>(nếu có)</i>: <span class="html_key"
+                                id="guarantorPhone_key">[...]</span>
+                            Fax <i>(nếu có)</i>: <span class="html_key" id="guarantorFax_key">[...]</span>
+                            Thư điện tử <i>(nếu có)</i>: <span class="html_key" id="guarantorEmail_key">[...]</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">4. Bên nhận bảo đảm</p>
+                        <p class="txcondensed">4.1. Họ và tên đầy đủ đối với cá nhân /tên đầy đủ đối với tổ chức:
+                            <i>(viết chữ
+                                IN HOA)</i>
+                        </p>
+                        <p><span class="html_key" id="beneficiaryNameCap_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p>4.2. Địa chỉ</p>
+                        <p><span class="html_key" id="beneficiaryAddress_key">[...]</span></p>
+                        <p>4.3. Giấy tờ xác định tư cách pháp lý: </p>
+                        <p><span id="legalIdentificationDocument_key">&squ;</span> Chứng minh nhân dân/Căn cước công dân/Chứng minh quân đội </p>
+                        <p><span id="legalTaxDocument_key">&squ;</span> Mã số thuế </p>
+                        <p>
+                            Số: <span class="html_key" id="beneficiaryLegalDocId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="beneficiaryLegalDocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="beneficiaryLegalDocDay_key">[...]</span>
+                            tháng <span class="html_key" id="beneficiaryLegalDocMonth_key">[...]</span>
+                            năm <span class="html_key" id="beneficiaryLegalDocYear_key">[...]</span>
+                        </p>
+                        <p>4.4. Số điện thoại <i>(nếu có)</i>: <span class="html_key"
+                                id="beneficiaryPhone_key">[...]</span>
+                            Fax <i>(nếu có)</i>: <span class="html_key" id="beneficiaryFax_key">[...]</span>
+                        </p>
+                        <p>Thư điện tử <i>(nếu có)</i>: <span class="html_key"
+                                id="beneficiaryEmail_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">5. Mô tả tài sản bảo đảm</p>
+                        <p class="bold">5.1. Quyền sử dụng đất</p>
+                        <p>
+                            (i) Thửa đất số: <span class="html_key" id="landId_key">[...]</span>; Tờ bản đồ số <i>(nếu
+                                có)</i>: <span class="html_key" id="landMapId_key">[...]</span>
+                        </p>
+                        <p>
+                            Mục đích sử dụng đất: <span class="html_key" id="landPurpose_key">[...]</span>
+                        </p>
+                        <p>
+                            Thời hạn sử dụng đất: <span class="html_key" id="landTerm_key">[...]</span>
+                        </p>
+                        <p>
+                            (ii) Địa chỉ thửa đất: <span class="html_key" id="landAddress_key">[...]</span>
+                        </p>
+                        <p>(iii) Giấy chứng nhận đối với quyền sử dụng đất</p>
+                        <p>
+                            <i>Tên giấy chứng nhận:</i> <span class="html_key" id="landOwnshDocName_key">[...]</span>
+                        </p>
+                        <p>
+                            Số phát hành: <span class="html_key" id="landOwnshDocId_key">[...]</span>,
+                            số vào sổ cấp giấy <span class="html_key" id="landOwnshDocAppBookId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="landOwnshDocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="landOwnshDocDay_key">[...]</span>
+                            tháng <span class="html_key" id="landOwnshDocMonth_key">[...]</span>
+                            năm <span class="html_key" id="landOwnshDocYear_key">[...]</span>
+                        </p>
+                        <p>
+                            <b>5.2. Tài sản gắn liền với đất đã được chứng nhận quyền sở hữu <span id="certifiedAttachedProperty_key">&squ;</span> </b>
+                        </p>
+                        <p>(i) Giấy chứng nhận</p>
+                        <p>
+                            <i>Tên giấy chứng nhận:</i> <span class="html_key" id="assetDocName_key">[...]</span>
+                        </p>
+                        <p>
+                            Số phát hành: <span class="html_key" id="assetDocId_key">[...]</span>,
+                            số vào sổ cấp giấy <span class="html_key" id="assetDocAppBookId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="assetDocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="assetDocDay_key">[...]</span>
+                            tháng <span class="html_key" id="assetDocMonth_key">[...]</span>
+                            năm <span class="html_key" id="assetDocYear_key">[...]</span>
+                        </p>
+                        <p>
+                            (ii) Số của thửa đất nơi có tài sản: <span class="html_key"
+                                id="assetLandId_key">[...]</span>;
+                            Tờ bản đồ số <i>(nếu có)</i> <span class="html_key" id="assetLandMapId_key">[...]</span>
+                        </p>
+                        <p>
+                            <b>5.3. Dự án đầu tư xây dựng nhà ở, dự án đầu tư xây dựng công trình không phải là nhà ở,
+                                dự án đầu tư nông nghiệp, dự án phát triển rừng, dự án khác có sử dụng đất <span id="landUseInvestmentProject_key">&squ;</span> </b>
+                        </p>
+                        <p>(i) Giấy chứng nhận</p>
+                        <p>
+                            <i>Tên Giấy chứng nhận:</i> <span class="html_key" id="landADocName_key">[...]</span>
+                        </p>
+                        <p>
+                            Số phát hành: <span class="html_key" id="landADocId_key">[...]</span>,
+                            số vào sổ cấp giấy <span class="html_key" id="landADocAppBookId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="landTypeADocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="landADocDay_key">[...]</span>
+                            tháng<span class="html_key" id="landADocMonth_key">[...]</span>
+                            năm <span class="html_key" id="landADocYear_key">[...]</span>
+                        </p>
+                        <p>
+                            (ii) Quyết định giao đất, cho thuê đất của cơ quan có thẩm quyền
+                            (đối với dự án đầu tư xây dựng nhà ở chưa được cấp Giấy chứng nhận đối với quyền sử dụng
+                            đất)
+                        </p>
+                        <p>
+                            <i>Tên Quyết định:</i> <span class="html_key" id="landAJudgementDocName_key">[...]</span>
+                        </p>
+                        <p>
+                            <i>Số: </i><span class="html_key" id="landAJudgementDocId_key">[...]</span>
+                        </p>
+                        <p>
+                            Cơ quan cấp: <span class="html_key" id="landAJudgementDocIssueBy_key">[...]</span>,
+                            ngày <span class="html_key" id="landAJudgementDocDay_key">[...]</span>
+                            tháng <span class="html_key" id="landAJudgementDocMonth_key">[...]</span>
+                            năm <span class="html_key" id="landAJudgementDocYear_key">[...]</span>
+                        </p>
+                        <p>
+                            (iii) Số của thửa đất nơi có dự án: <span class="html_key" id="landAId_key">[...]</span>;
+                            Tờ bản đồ số <i>(nếu có)</i>: <span class="html_key" id="landAMapId_key">[...]</span>
+                        </p>
+                        <p>
+                            (iv) Tên dự án: <span class="html_key" id="landAProjectName_key">[...]</span>
+                        </p>
+                        <p>
+                            Căn cứ pháp lý xác lập dự án : <span class="html_key"
+                                id="landAProjectLegislation_key">[...]</span>
+                        </p>
+                        <p>
+                            <b>5.4. Nhà ở hình thành trong tương lai, tài sản khác gắn liền với đất hình thành trong
+                                tương
+                                lai <span id="futurePropertyOnLand_key">&squ;</span></b>
+                        </p>
+                        <p>
+                            5.4.1. Bên bảo đảm đồng thời là người sử dụng đất <span id="securedPartyLandUser_key">&squ;</span>
+                        </p>
+                        <p>
+                            (i) Giấy chứng nhận đối với quyền sử dụng đất
+                        </p>
+                        <p>
+                            <i>Tên Giấy chứng nhận</i> <span class="html_key" id="landB1DocName_key">[...]</span>
+                        </p>
+                        <p>
+                            <i>Số phát hành</i>: <span class="html_key" id="landB1DocId_key">[...]</span>,
+                            <i>số vào sổ cấp giấy:</i> <span class="html_key" id="landB1DocAppBookId_key">[...]</span>
+                        </p>
+                        <p>
+                            <i>Cơ quan cấp:</i> <span class="html_key" id="landB1DocIssueBy_key">[...]</span>,
+                            <i>ngày <span class="html_key" id="landB1DocDay_key">[...]</span>
+                                tháng <span class="html_key" id="landB1DocMonth_key">[...]</span>
+                                năm <span class="html_key" id="landB1DocYear_key">[...]</span></i>
+                        </p>
+                        <p>
+                            (ii) Số của thửa đất nơi có dự án: <span class="html_key" id="landB1Id_key">[...]</span>;
+                            Tờ bản đồ số <i>(nếu có)</i>: <span class="html_key" id="landB1MapId_key">[...]</span>
+                        </p>
+                        <p>
+                            (iii) Mô tả nhà ở hình thành trong tương lai, tài sản khác gắn liền với đất hình thành trong
+                            tương lai:
+                        </p>
+                        <p><span class="html_key" id="landB1Desc_key">[...]</span></p>
+                        <p>
+                            5.4.2. Bên bảo đảm không đồng thời là người sử dụng đất <span id="securedPartyNotLandUser_key">&squ;</span>
+                        </p>
+                        <p>
+                            (i) Số của thửa đất nơi có dự án: <span class="html_key" id="landB2Id_key">[...]</span>;
+                            Tờ bản đồ số <i>(nếu có)</i>: <span class="html_key" id="landB2MapId_key">[...]</span>;
+                        </p>
+                        <p>
+                            (ii) Mô tả nhà ở hình thành trong tương lai, tài sản khác gắn liền với đất hình thành trong
+                            tương lai:
+                        </p>
+                        <p><span class="html_key" id="landB2Desc_key">[...]</span></p>
+                        <p>
+                            <b>5.5. Tài sản gắn liền với đất đã hình thành không phải là nhà ở
+                                mà pháp luật không quy định phải đăng ký quyền sở hữu và cũng chưa được đăng ký quyền sở
+                                hữu
+                                theo yêu cầu <span id="establishedNonResidentialLandAssets_key">&squ;</span> </b>
+                        </p>
+                        <p>5.5.1. Bên bảo đảm đồng thời là người sử dụng đất <span id="landUserSecuredParty_key">&squ;</span></p>
+                        <p>(i) Giấy chứng nhận đối với quyền sử dụng đất:</p>
+                        <p>
+                            <i>Tên Giấy chứng nhận</i> <span class="html_key" id="landC1Doc_key">[...]</span>
+                        </p>
+                        <p>
+                            <i>Số phát hành</i>: <span class="html_key" id="landC1DocId_key">[...]</span>,
+                            <i>số vào sổ cấp giấy:</i> <span class="html_key" id="landC1DocAppBookId_key">[...]</span>
+                        </p>
+                        <p>
+                            <i>Cơ quan cấp:</i> <span class="html_key" id="landC1DocIssueBy_key">[...]</span>,
+                            <i>ngày <span class="html_key" id="landC1DocDay_key">[...]</span>
+                                tháng <span class="html_key" id="landC1DocMonth_key">[...]</span>
+                                năm <span class="html_key" id="landC1DocYear_key">[...]</span></i>
+                        </p>
+                        <p>
+                            (ii) Số của thửa đất nơi có tài sản gắn liền với đất: <span class="html_key"
+                                id="landC1Id_key">[...]</span>;
+                            Tờ bản đồ số <i>(nếu có)</i>: <span class="html_key" id="landC1MapId_key">[...]</span>
+                        </p>
+                        <p>(iii) Mô tả tài sản gắn liền với đất:</p>
+                        <p><span class="html_key" id="landC1AssetDesc_key">[...]</span></p>
+                        <p>5.5.2. Bên bảo đảm không đồng thời là người sử dụng đất <span id="nonLandUserSecuredParty_key">&squ;</span> </p>
+                        <p>
+                            (i) Số của thửa đất nơi có tài sản gắn liền với đất: <span class="html_key"
+                                id="landC2Id_key">[...]</span> ;
+                            Tờ bản đồ số <i>(nếu có)</i>: <span class="html_key" id="landC2MapId_key">[...]</span>
+                        </p>
+                        <p>(ii) Mô tả tài sản gắn liền với đất:</p>
+                        <p><span class="html_key" id="landC2AssetDesc_key">[...]</span></p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="bold">6. Giấy tờ kèm theo :</p>
+                        <p><span class="html_key" id="attachedDoc_key">[...]</span></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>7. Cách thức nhận kết quả đăng ký</p>
+                    </td>
+                    <td>
+                        <p><span id="receiveAtRegistrationAuthority_key">&squ;</span> Nhận trực tiếp tại cơ quan đăng ký</p>
+                        <p><span id="receiveByPostalService_key">&squ;</span> Nhận qua dịch vụ bưu chính <i>(ghi rõ tên và địa chỉ người nhận)</i>: <span id="receiveByPostalService_key"></span></p>
+                        <p>&nbsp;</p>
+                        <p><span id="electronicMethod_key">&squ;</span> Cách thức điện tử <i>(nếu pháp luật quy định)</i>: <span id="electronicMethod_key"></span></p>
+                        <p>&nbsp;</p>
+                        <p><span id="otherMethods_key">&squ;</span> Cách thức khác <i>(nếu được cơ quan đăng ký đồng ý)</i>: <span id="otherMethods_key"></span></p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <p class="tx14 italic">
+                            Người yêu cầu đăng ký chịu trách nhiệm trước pháp luật về
+                            trung thực trong kê khai và về tính chính xác của thông tin được kê khai trong Phiếu yêu
+                            cầu này.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border tx14">
+                <tr>
+                    <td>
+                        <p class="txcenter"><b>BÊN BẢO ĐẢM</b></p>
+                        <p class="txcenter"><b>(HOẶC NGƯỜI ĐẠI DIỆN)</b></p>
+                        <p class="txcenter"><i>Ký, ghi rõ họ và tên, chức danh (nếu có),đóng dấu (nếu có)</i>
+                        </p>
+                    </td>
+                    <td>
+                        <p class="txcenter"><b>BÊN NHẬN BẢO ĐẢM</b></p>
+                        <p class="txcenter"><b>(HOẶC NGƯỜI ĐẠI DIỆN)</b></p>
+                        <p class="txcenter"><i>Ký, ghi rõ họ và tên, chức danh (nếu có),đóng dấu (nếu có)</i>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="table-no-border tx14">
+                <tr>
+                    <td>
+                        <p class="txcenter"><b>QUẢN TÀI VIÊN/DOANH NGHIỆP</b></p>
+                        <p class="txcenter"><b>QUẢN LÝ, THANH LÝ TÀI SẢN</b></p>
+                        <p class="txcenter"><b>(HOẶC NGƯỜI ĐẠI DIỆN)</b></p>
+                        <p class="txcenter"><i>Ký, ghi rõ họ và tên, chức danh (nếu có),đóng dấu (nếu có)</i>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <table class="tx14">
+                <tr>
+                    <td>
+                        <p class="txcenter"><b>PHẦN CHỨNG NHẬN CỦA CƠ QUAN ĐĂNG KÝ </b></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            Cơ quan đăng ký có thẩm quyền: <span class="html_key" id="claimBy_key">[...]</span>
+                        </p>
+                        <p>
+                            Chứng nhận biện pháp bảo đảm bằng: <span class="html_key"
+                                id="claimStatement_key">[...]</span>
+                        </p>
+                        <p>
+                            đã được đăng ký theo nội dung kê khai tại Phiếu yêu cầu này tại thời điểm
+                            <span class="html_key" id="claimHour_key">[...]</span> giờ
+                            <span class="html_key" id="claimMinute_key">[...]</span> phút,
+                            ngày <span class="html_key" id="claimDay_key">[...]</span>
+                            tháng <span class="html_key" id="claimMonth_key">[...]</span>
+                            năm <span class="html_key" id="claimYear_key">[...]</span>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 40%;">
+                        <p class="txcenter"><i>........, ngày........ tháng........ năm.........</i></p>
+                        <p class="txcenter"><b>NGƯỜI CÓ THẨM QUYỀN </b></p>
+                        <p class="txcenter"><b>CỦA CƠ QUAN ĐĂNG KÝ </b></p>
+                        <p class="txcenter"><i>(Ký, ghi rõ họ và tên, chức danh, đóng dấu)</i></p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+            <p>&nbsp;</p>
+            <p class="txcenter tx14"><b>HƯỚNG DẪN CHUNG</b></p>
+            <p class="tx14 txindent">1. Nội dung kê khai phải trung thực, đầy đủ, chính xác.</p>
+            <p class="tx14 txindent">2. Đối với phần kê khai có lựa chọn thì đánh dấu (X) vào ô vuông tương ứng được lựa
+                chọn.</p>
+            <p class="tx14 txindent">3. Gạch chéo đối với mục không có thông tin kê khai trên Phiếu yêu cầu đăng ký.</p>
+            <p class="tx14 txindent">4. Thông tin được kê khai, nội dung liên quan trong Phiếu yêu cầu có thể được thể
+                hiện
+                trên nhiều trang.
+                Trường hợp này, các trang phải được đánh số thứ tự và người yêu cầu đăng ký phải ký nháy vào từng trang.
+            </p>
+            <p class="tx14 txindent">5. Đối với nội dung tại điểm 5.4.1 (iii), 5.4.2 (ii), 5.5.1 (iii), 5.5.2 (ii) thể
+                hiện
+                trên Phiếu yêu cầu
+                đăng ký, kê khai:</p>
+            <p class="tx14 txindent">- Nhà ở riêng lẻ: Loại nhà (nhà biệt thự/nhà liền kề/nhà ở riêng lẻ khác), địa chỉ
+                nhà;
+            </p>
+            <p class="tx14 txindent">- Tòa nhà chung cư: Tên của tòa nhà, tổng số căn hộ, địa chỉ tòa nhà;</p>
+            <p class="tx14 txindent">- Căn hộ chung cư: Số của căn hộ, tầng số của căn hộ, địa chỉ tòa nhà chung cư;</p>
+            <p class="tx14 txindent">- Công trình xây dựng không phải là nhà ở: Loại công trình, tên hạng mục công
+                trình, địa
+                chỉ công trình;
+            </p>
+            <p class="tx14 txindent">- Rừng sản xuất là rừng trồng, cây lâu năm: Loại cây rừng, loại cây lâu năm, địa
+                chỉ nơi
+                có cây rừng, cây
+                lâu năm;</p>
+            <p class="tx14 txindent">- Công trình xây dựng là khách sạn, căn hộ - khách sạn, văn phòng lưu trú, biệt thự
+                du
+                lịch nghỉ dưỡng,
+                căn hộ du lịch nghỉ dưỡng, nhà nghỉ du lịch và công trình khác (công trình phục vụ mục đích lưu trú, du
+                lịch) trên đất thương mại, dịch vụ: Kê khai trong trường hợp pháp luật về đất đai, pháp luật khác liên
+                quan có quy định và tại mục tương ứng trong kê khai nhà ở, tòa nhà chung cư, căn hộ chung cư, công trình
+                xây dựng khác.</p>
+        </div>
+    </div>
+</body>

@@ -1,0 +1,143 @@
+Loại hợp đồng thế chấp: mortgageContractType_key
+Số hợp đồng thế chấp: mortgageContractNumber_key
+Số năm hợp đồng (20XX): contractYear_key
+Mã PVcomBank (PVB): bankCode_key
+Ngày lập hợp đồng:
+Ngày: contractSignedDay_key
+Tháng: contractSignedMonth_key
+Năm: contractSignedYear_key
+Địa điểm ký kết hợp đồng: contractLocation_key
+Họ tên: mortgagorName_key
+Ngày sinh: mortgagorBirthDate_key
+Số CMND/CCCD/Hộ chiếu: mortgagorIdNumber_key
+Nơi cấp CMND/CCCD/Hộ chiếu: mortgagorIdIssuedBy_key
+Ngày cấp CMND/CCCD/Hộ chiếu: mortgagorIdIssuedDate_key
+Hộ khẩu thường trú: mortgagorPermanentAddress_key
+Nơi ở hiện tại: mortgagorCurrentAddress_key
+Trường hợp Bên Thế Chấp là tổ chức: mortgagorOrganization_key
+Tên công ty: organizationName_key
+Mã số doanh nghiệp: organizationBusinessId_key
+Địa chỉ: organizationAddress_key
+Điện thoại: organizationPhoneNumber_key
+Fax: organizationFaxNumber_key
+Tên đại diện: organizationRepresentativeName_key
+Chức vụ của đại diện: organizationRepresentative
+Trường hợp Bên Thế Chấp là tổ chức:
+Số CMND/CCCD/Hộ chiếu: mortgagorRepIdNumber_key
+Nơi cấp: mortgagorRepIdIssuer_key
+Ngày cấp: mortgagorRepIdIssueDate_key
+Văn bản ủy quyền số: mortgagorAuthorizationNumber_key
+Ngày ủy quyền: mortgagorAuthorizationDate_key
+Cơ quan ủy quyền: mortgagorAuthorizingAgency_key
+
+Bên Nhận Thế Chấp (Ngân hàng):
+Tên ngân hàng: bankName_key
+Mã số doanh nghiệp/Mã số chi nhánh: bankIdNumber_key
+Địa chỉ: bankAddress_key
+Điện thoại: bankPhone_key
+Fax: bankFax_key
+Đại diện: bankRepName_key
+Chức vụ: bankRepPosition_key
+Số CMND/CCCD/Hộ chiếu của đại diện: bankRepIdNumber_key
+Nơi cấp CMND/CCCD/Hộ chiếu: bankRepIdIssuer_key
+Ngày cấp CMND/CCCD/Hộ chiếu: bankRepIdIssueDate_key
+Văn bản ủy quyền số: bankAuthDocNumber_key
+Cơ quan ủy quyền: bankAuthAgency_key
+
+Giấy chứng nhận quyền sử dụng đất:
+
+Giấy chứng nhận: landCertificateNumber_key
+Số Giấy chứng nhận: landCertificateId_key
+Cơ quan cấp: landCertificateIssuer_key
+Ngày cấp: landCertificateIssueDate_key
+Số vào sổ: landCertificateRegistryNumber_key
+Thông tin thửa đất:
+
+Thửa đất số: landParcelNumber_key
+Tờ bản đồ số: mapSheetNumber_key
+Địa chỉ thửa đất: landAddress_key
+Diện tích:
+Diện tích (số): landArea_key
+Diện tích (bằng chữ): landAreaInWords_key
+Hình thức sử dụng:
+Sử dụng riêng: privateUseArea_key
+Sử dụng chung: sharedUseArea_key
+Nguồn gốc sử dụng đất: landUseSource_key
+
+Thông tin tài sản gắn liền với đất:
+Địa chỉ: attachedPropertyAddress_key
+Số tầng: numberOfFloors_key
+Diện tích xây dựng: constructionArea_key
+Kết cấu: structureType_key
+Năm xây dựng: constructionYear_key
+
+
+Giấy chứng nhận quyền sử dụng đất:
+Giấy chứng nhận: landUseCertificate_key
+Số Giấy chứng nhận: landUseCertificateNumber_key
+Cơ quan cấp: landUseCertificateIssuer_key
+Ngày cấp: landUseCertificateIssueDate_key
+Số vào sổ: landUseCertificateRegistryNumber_key
+
+Thông tin thửa đất:
+Thửa đất số: parcelNumber_key
+Tờ bản đồ số: mapSheetId_key
+Địa chỉ thửa đất: parcelAddress_key
+Diện tích:
+Diện tích (số): parcelArea_key
+Diện tích (bằng chữ): parcelAreaInWords_key
+Hình thức sử dụng:
+Sử dụng riêng: exclusiveUseArea_key
+Sử dụng chung: commonUseArea_key
+Nguồn gốc sử dụng đất: landOrigin_key
+
+Tài sản gắn liền với đất:
+Loại tài sản thế chấp: mortgagedAssetType_key
+Giấy chứng nhận: attachedAssetCertificate_key
+Số Giấy chứng nhận: attachedAssetCertificateNumber_key
+Cơ quan cấp: attachedAssetCertificateIssuer_key
+Ngày cấp: attachedAssetCertificateIssueDate_key
+Số vào sổ: attachedAssetRegistryNumber_key
+Địa chỉ: attachedAssetAddress_key
+Số tầng: attachedAssetFloorNumber_key
+Diện tích sàn: attachedAssetFloorArea_key
+Diện tích xây dựng: attachedAssetConstructionArea_key
+Kết cấu: attachedAssetStructureType_key
+Thửa đất gắn liền với tài sản:
+
+Thửa đất số: attachedLandParcelNumber_key
+Tờ bản đồ số: attachedMapSheetNumber_key
+Địa chỉ thửa đất: attachedLandAddress_key
+Diện tích:
+Diện tích (số): attachedLandArea_key
+Diện tích (bằng chữ): attachedLandAreaInWords_key
+Hình thức sử dụng: attachedLandUseType_key
+Nguồn gốc sử dụng: attachedLandUseOrigin_key
+
+Giá trị tài sản thế chấp (số): mortgagedAssetValue_key
+Giá trị tài sản thế chấp (bằng chữ): mortgagedAssetValueInWords_key
+Số hợp đồng cho vay/tín dụng/cấp bảo lãnh: creditAgreementNumber_key
+Ngày ký hợp đồng: creditAgreementDay_key, creditAgreementMonth_key, creditAgreementYear_key
+Số tiền cấp tín dụng gốc tối đa: maximumCreditAmount_key
+Thông tin bổ sung cho các nghĩa vụ khác: additionalObligationDetails_key
+
+Đối với Bên Được Bảo Đảm là tổ chức:
+
+Tên công ty: guaranteedPartyCompanyName_key
+Mã số doanh nghiệp: guaranteedPartyCompanyId_key
+Trụ sở chính: guaranteedPartyCompanyAddress_key
+Mã số thuế: guaranteedPartyTaxCode_key
+Đối với Bên Được Bảo Đảm là cá nhân:
+
+Họ tên: guaranteedPartyFullName_key
+Chứng minh nhân dân/Căn cước công dân/Hộ chiếu số: guaranteedPartyIdNumber_key
+Cơ quan cấp CMND/CCCD/Hộ chiếu: guaranteedPartyIdIssuer_key
+Ngày cấp: guaranteedPartyIdIssueDate_key
+Hộ khẩu thường trú: guaranteedPartyPermanentAddress_key
+Địa chỉ hiện tại: guaranteedPartyCurrentAddress_key
+
+Số Giấy chứng nhận: certificateNumber_key
+Cơ quan cấp Giấy chứng nhận: certificateIssuer_key
+Ngày cấp Giấy chứng nhận: certificateIssueDate_key
+Số vào sổ: certificateRegistryNumber_key
+Văn bản gia hạn/sửa đổi/bổ sung: amendmentDocuments_key

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo file Word với chỉ mục</title>
+    <!-- Sử dụng thư viện docx qua CDN -->
+    <script src="../code_xuat_word/docx.js"></script>
+</head>
+
+<body>
+    <h1>Tạo file Word với chỉ mục</h1>
+
+    <button onclick="createCustomDocx()">Tạo file DOCX</button>
+
+    <script>
+        function createCustomDocx() {
+            // Khởi tạo một tài liệu mới
+            var doc = new docx.Document({
+                numbering: {
+                    config: [
+                        {
+                            reference: "numbering1",
+                            levels: [
+                                {
+                                    level: 0,
+                                    format: docx.LevelFormat.DECIMAL,
+                                    text: "Chương %1.",
+                                    alignment: docx.AlignmentType.START,
+                                    style: {
+                                        paragraph: {
+                                            indent: { left: 720, hanging: 260 },
+                                        },
+                                    },
+                                },
+                            ],
+                        },
+                    ],
+                },
+                sections: [
+                    {
+                        properties: {},
+                        children: [
+                            new docx.Paragraph({
+                                text: "Đoạn văn đầu tiên được tùy chỉnh",
+                                alignment: docx.AlignmentType.LEFT, // Căn lề trái
+                                spacing: { before: 200, after: 200 }, // Khoảng cách trước và sau đoạn
+                                indent: { left: 400 }, // Thụt lề trái 400
+                                style: "myCustomStyle", // Đặt tên kiểu tùy chỉnh
+                            }),
+                            new docx.Paragraph({
+                                text: "Đoạn văn thứ hai với định dạng khác",
+                                alignment: docx.AlignmentType.RIGHT, // Căn lề phải
+                                spacing: { before: 100, after: 100 }, // Khoảng cách trước và sau đoạn
+                                indent: { left: 200 }, // Thụt lề trái ít hơn
+                                style: "anotherCustomStyle", // Đặt tên kiểu tùy chỉnh khác
+                            }),
+                            new docx.Paragraph({
+                                text: "Đoạn văn này có in đậm và in nghiêng",
+                                bold: true,
+                                italics: true,
+                                underline: {},
+                                spacing: { before: 100, after: 100 }, // Khoảng cách trước và sau đoạn
+                            }),
+                            new docx.Paragraph({
+                                text: "Đây là một danh sách có đánh số:",
+                            }),
+                            new docx.Paragraph({
+                                text: "Mục số 1",
+                                numbering: {
+                                    reference: "numbering1",
+                                    level: 0,
+                                },
+                            }),
+                            new docx.Paragraph({
+                                text: "Mục số 2",
+                                numbering: {
+                                    reference: "numbering1",
+                                    level: 0,
+                                },
+                            }),
+                        ],
+                    },
+                ],
+            });
+
+            // Tạo file và lưu
+            docx.Packer.toBlob(doc).then(blob => {
+                saveAs(blob, "custom_paragraph.docx");
+            });
+        }
+    </script>
+
+    <!-- Thư viện FileSaver.js để lưu file DOCX -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+
+</html>
